@@ -2,12 +2,12 @@
   <div class="box">
     <div class="login_language">
       <!-- elementUI Select选择器(下拉列表) -->
-      <!-- v-model: 绑定值;  popper-class: Select下拉框的类名; change: 选中值发生变化时触发; prefix: 插槽,Select组件头部内容 -->
+      <!-- v-model:绑定值;  popper-class:Select下拉框的类名;  change:选中值发生变化时触发;  prefix:插槽,Select组件头部内容  -->
       <el-select v-model="language" popper-class="language" @change="changeLanguage">
         <template #prefix>
           <img :src="findLanguageImg()" alt="">
         </template>
-        <!-- label: 显示的标签,若不设置则默认与value相同; value: 选项的值; -->
+        <!-- label:显示的标签,若不设置则默认与value相同;  value:选项的值;  -->
         <el-option v-for="(itm, idx) in languages" :key="idx" :label="itm.label" :value="itm.value">
           <img :src="itm.img" alt="">
           <span>{{ itm.label }}</span>
@@ -21,7 +21,7 @@
       </div>
       <div class="login_info">
         <div class="login_tab">
-          <!-- transform: 变换; translateX: X轴平移; -->
+          <!-- transform:变换;  translateX:X轴平移;  -->
           <div :style="{transform:`translateX(${isLogin ? 0 : 100}%)`}" class="choose_tab_active_bar"></div>
           <div :class="['choose_tab', {'is_active': isLogin}]" @click="isLogin=true">{{ $t('login.login') }}</div>
           <div :class="['choose_tab', {'is_active': !isLogin}]" @click="isLogin=false">{{ $t('login.signUp') }}</div>
@@ -189,6 +189,15 @@ export default {
           transition: .3s;
         }
       }
+
+      // ::deep .el-form-item, .el-form-item {
+      //   margin-bottom: 12px;
+      // }
+
+      // ::deep .el-input__inner, .el-input__inner {
+      //   height: 46px;
+      //   font-size: 16px;
+      // }
     }
   }
 }
