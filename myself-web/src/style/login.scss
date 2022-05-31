@@ -1,3 +1,42 @@
-.fxq_login {
+// ! 登录全局样式
 
+// input输入框
+.el-form-item__content {
+  margin-left: 0px !important;
+}
+
+// input输入框
+.fxq_login {
+  .el-input__inner {
+    font-weight: 700;
+    border: 0;
+  }
+}
+
+// 下拉框选项的样式修改
+.language {
+  .el-select-dropdown__item {
+    display: flex;
+    padding-left: 5px;
+    font-size: 5px;
+  }
+
+  .el-select-dropdown__item, .el-select-dropdown__item.selected {
+    color:#606266;
+    font-weight: 700;
+  }
+
+  .el-select-dropdown__item.hover img {
+    border: 1px solid #fa8e03;
+    // x偏移量 | y偏移量 | 阴影模糊半径 | 阴影扩散半径 | 阴影颜色
+    box-shadow: 0px 2px 12px 0px rgba(185, 94, 0, 0.24);
+  }
+
+  img {
+    width: 16px;
+    height: 16px;
+    transition: 0.2s;
+    border-radius: 50%;
+    margin: 9px 7px 5px 4px;
+  }
 }

@@ -13,16 +13,31 @@
         <!-- elementUI Input输入框 -->
         <!-- v-model:绑定值; -->
         <!-- .native就是把组件标签变回原生DOM的一种方式，相当于给组件绑定原生事件。给普通的HTML标签监听一个事件，之后添加 .native 修饰符是不会起作用的。 -->
-        <el-input v-model.trim="ruleForm.email" :placeholder="$t(&quot;login.email&quot;)" maxlength="50" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')"/>
+        <el-input v-model.trim="ruleForm.email" :placeholder="$t('login.email')" maxlength="50" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')"/>
       </el-form-item>
       <el-form-item v-else prop="phone" class="phone">
-
+        <el-input v-model.trim="ruleForm.phone" :placeholder="$t('login.phone')" maxlength="12" @input="formatPhone" @focus="initFromRules" @change="getByPhoneFun" @keyup.enter.native="submitForm('ruleForm')">
+          <!-- prepend:代表放在紧贴在依赖组件的前面 -->
+          <el-select slot="prepend" v-model="language" popper-class="language" @focus="initFromRules">
+            <template #prefix>
+              <img :src="findLanguageImg()" alt="">
+            </template>
+            <el-option v-for="(itm,idx) in languages" :key="idx" :label="itm.label" :value="itm.value">
+              <img :src="itm.img" alt="">
+              <span>{{ itm.label }}</span>
+            </el-option>
+          </el-select>
+        </el-input>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
+import { PHONE_AREA_CODE_DEFAULT } from '@/utils/constant'
+import iconEnglish from '@/assets/icon/pic_english.png' // 英文icon -> 切换语言
+import iconChinese from '@/assets/icon/pic_chinese.png' // 中文icon -> 切换语言
+
 export default {
   name: 'LoginInput',
   data () {
@@ -37,7 +52,12 @@ export default {
         type: false
       },
       // 表单认证规则
-      rules: {}
+      rules: {},
+      language: PHONE_AREA_CODE_DEFAULT, // 默认手机号
+      languages: [ // 手机号option列表
+        { label: '+62', img: iconEnglish, value: '62' },
+        { label: '+86', img: iconChinese, value: '86' }
+      ]
     }
   },
   methods: {
@@ -47,6 +67,13 @@ export default {
     },
     initFromRules () {
 
+    },
+    formatPhone () {},
+    getByPhoneFun () {},
+    // 设置语言的icon
+    findLanguageImg () {
+      const val = this.languages.find(v => v.value === this.language)
+      return val ? val.img : iconEnglish
     }
   }
 }
@@ -98,8 +125,50 @@ export default {
     }
   }
 
-  ::deep .el-input__inner, .el-input__inner {
+  ::v-deep .el-input__inner, .el-input__inner {
     box-shadow: 0 0 0px 1000px #f9f6f4 inset;
+  }
+}
+
+.phone {
+
+  ::v-deep .el-input-group__prepend {
+    background-color: #F9F6F4;
+    border: 0;
+  }
+
+  .el-select {
+    width: 100px;
+
+    &:hover {
+      color: #262326;
+    }
+
+    ::v-deep .el-input__prefix {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 22px;
+        height: 16px;
+        margin-left: 5px;
+        transition: .2s;
+      }
+    }
+
+    ::v-deep .el-input__suffix {
+      right: 8px
+    }
+
+    ::v-deep .el-input__inner {
+      margin-left: 4px;
+      color: #262326;
+    }
+
+  }
+
+  ::v-deep .el-input-group--prepend >.el-input__inner {
+    padding-left: 4px;
   }
 }
 

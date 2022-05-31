@@ -19,7 +19,7 @@
         <span class="login_tips">{{ $t('login.welcome') }}</span>
         <img src="@/assets/icon/发布会.svg" class="login_bg" alt="">
       </div>
-      <div class="login_info">
+      <div class="login_info login_info_from">
         <div class="login_tab">
           <!-- transform:变换;  translateX:X轴平移;  -->
           <div :style="{transform:`translateX(${isLogin ? 0 : 100}%)`}" class="choose_tab_active_bar"></div>
@@ -189,39 +189,17 @@ export default {
           transition: .3s;
         }
       }
+    }
 
-      // ::deep .el-form-item, .el-form-item {
-      //   margin-bottom: 12px;
-      // }
+    .login_info_from {
+      padding-right: 50px;
 
-      // ::deep .el-input__inner, .el-input__inner {
-      //   height: 46px;
-      //   font-size: 16px;
-      // }
+      ::v-deep .el-input__inner {
+        height: 46px;
+        font-size: 16px;
+      }
     }
   }
 }
 
-.language {
-  // 下拉框选项的样式修改
-  .el-select-dropdown__item {
-    display: flex;
-    padding-left: 5px;
-    font-size: 5px;
-  }
-
-  .el-select-dropdown__item.hover img {
-    border: 1px solid #fa8e03;
-    // x偏移量 | y偏移量 | 阴影模糊半径 | 阴影扩散半径 | 阴影颜色
-    box-shadow: 0px 2px 12px 0px rgba(185, 94, 0, 0.24);
-  }
-
-  img {
-    width: 16px;
-    height: 16px;
-    transition: 0.2s;
-    border-radius: 50%;
-    margin: 9px 7px 5px 4px;
-  }
-}
 </style>
