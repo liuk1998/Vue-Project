@@ -68,7 +68,7 @@ export default {
         if (value.length !== 11) {
           callback(new Error(this.$i18n.t('login.phoneCnError')))
         }
-      } else if (value.length < 8 || value.length > 12) {
+      } else if (value.length < 8 || value.length > 13) {
         callback(new Error(this.$i18n.t('login.phoneIdError')))
       }
     }
@@ -106,7 +106,7 @@ export default {
         { label: '+62', img: iconEnglish, value: '62' },
         { label: '+86', img: iconChinese, value: '86' }
       ],
-      passwd: 'password'
+      passwd: 'password' // 显示密码
     }
   },
   methods: {
@@ -136,7 +136,7 @@ export default {
     },
     // 忘记密码
     goForget () {
-      this.$router.push({
+      this.$router.push({ // 跳转页面
         name: 'forgetPassword'
       })
     },

@@ -9,7 +9,6 @@ if (window.Vue) {
   window.ga = ga
   Vue.use(install)
 }
-
 ga.install = install
 
 export default ga

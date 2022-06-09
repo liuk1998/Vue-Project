@@ -14,18 +14,18 @@ export default {
    * @param {*} oldVnode：上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用。
    * 注意：除了 el 之外，其它参数都应该是只读的，切勿进行修改。如果需要在钩子之间共享数据，建议通过元素的 dataset 来进行。
    */
-  binding (el, binding) {
+  bind (el, binding) {
     el.addEventListener('click', () => {
-      console.log(binding)
-      const { eventCategory, eventAction, eventLabel, eventValue } = binding.value
-      if (window.gtag) {
-        window.gtag('event', eventAction, {
-          event_category: eventCategory,
-          event_label: eventLabel,
-          value: eventValue,
-          send_to: 'G-WP70ELGEPN'
-        })
-      }
+      console.log('自定义指令v-ga', el, binding)
+      // const { eventCategory, eventAction, eventLabel, eventValue } = binding.value
+      // if (window.gtag) {
+      //   window.gtag('event', eventAction, {
+      //     event_category: eventCategory,
+      //     event_label: eventLabel,
+      //     value: eventValue,
+      //     send_to: 'G-WP70ELGEPN'
+      //   })
+      // }
     })
   },
   // 只调用一次，指令与元素解绑时调用。
