@@ -6,9 +6,11 @@ import router from './router'
 import store from './store'
 import i18n from './lang' // 国际化
 import '@/style/login.scss'
+import ga from './directive/ga/index'
 
 Vue.use(i18n)
 Vue.use(ElementUI) // 引入 Element
+Vue.use(ga) // 自定义指令
 
 Vue.config.productionTip = false // 阻止启动生产消息
 

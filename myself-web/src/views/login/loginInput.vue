@@ -5,8 +5,8 @@
       <div :class="loginChannel === 1 ? 'login-unselect' : 'login-select'" @click="toggleLogin(0)">{{ $t('login.email') }}</div>
     </div>
     <!-- elementUI Form表单 -->
-    <!-- ref:认证;  model:表单数据对象;  validate-on-rule-change:是否在rules属性改变后立即触发一次验证;  rules:表单验证规则;  label-width:表单域标签的宽度(直接子元素的form-item会继承宽度)  -->
-    <el-form ref="ruleForm" :model="ruleForm" :validate-on-rule-change="false" :rules="rules" label-width="100px" class="demo-ruleForm">
+    <!-- ref:获取该表单的form组件;  model:表单数据对象;  validate-on-rule-change:是否在rules属性改变后立即触发一次验证;  rules:表单验证规则; -->
+    <el-form ref="ruleForm" :model="ruleForm" :validate-on-rule-change="false" :rules="rules">
       <!-- elementUI Form表单的子元素 -->
       <!-- prop:表单域model字段;  -->
       <el-form-item v-if="loginChannel === 0" prop="email">
@@ -16,7 +16,7 @@
         <el-input v-model.trim="ruleForm.email" :placeholder="$t('login.email')" maxlength="50" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')"/>
       </el-form-item>
       <el-form-item v-else prop="phone" class="phone">
-        <el-input v-model.trim="ruleForm.phone" :placeholder="$t('login.phone')" maxlength="12" @input="formatPhone" @focus="initFromRules" @change="getByPhoneFun" @keyup.enter.native="submitForm('ruleForm')">
+        <el-input v-model.trim="ruleForm.phone" :placeholder="$t('login.phone')" maxlength="12" @input="formatPhone" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')">
           <!-- prepend:代表放在紧贴在依赖组件的前面 -->
           <el-select slot="prepend" v-model="language" popper-class="language" @focus="initFromRules">
             <template #prefix>
@@ -28,6 +28,20 @@
             </el-option>
           </el-select>
         </el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input v-model="ruleForm.password" :type="passwd" class="password" :placeholder="$t('login.password')" maxlength="30" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')">
+          <!-- suffix:代表放在紧贴在依赖组件的后面 -->
+          <i v-if="ruleForm.password != ''" slot="suffix" class="el-icon-view" @click="showPassword"></i>
+        </el-input>
+      </el-form-item>
+      <el-form-item prop="type">
+        <div class="forget_password" @click="goForget">{{ $t('login.forgetPassword') }}</div>
+      </el-form-item>
+      <el-form-item>
+        <!-- elementUI Button按钮 -->
+        <!-- type:类型; -->
+        <el-button v-ga="{ eventCategory: '登录', eventLabel: '登录点击',eventAction: 'click', value: Date.now() }" type="primary" @click="submitForm('ruleForm')">{{ $t('login.login') }}</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -41,23 +55,58 @@ import iconChinese from '@/assets/icon/pic_chinese.png' // 中文icon -> 切换�
 export default {
   name: 'LoginInput',
   data () {
+    // 自定义校验函数 -> 密码校验 (固定三个参数)
+    const validatePassword = (rule, value, callback) => {
+      value === '' && callback(new Error(this.$i18n.t('login.isEmpty')));
+      (value.length < 8 || value.length > 30) && callback(new Error(this.$i18n.t('login.newPwd1')))
+    }
+    // 自定义校验函数 -> 电话号校验 (固定三个参数)
+    const validatePhone = (rule, value, callback) => {
+      value === '' && callback(new Error(this.$i18n.t('login.isEmpty')))
+      value.substr(0, 1) === '0' && callback(new Error(this.$t('login.phoneCheck')))
+      if (this.language === '86') {
+        if (value.length !== 11) {
+          callback(new Error(this.$i18n.t('login.phoneCnError')))
+        }
+      } else if (value.length < 8 || value.length > 12) {
+        callback(new Error(this.$i18n.t('login.phoneIdError')))
+      }
+    }
     return {
       loginChannel: 1, // 登录渠道：0：通过邮箱，1：通过手机号码
       // 表单认证信息
       ruleForm: {
         email: '',
         password: '',
-        compCompany: '', // 企业信息
         phone: '',
         type: false
       },
       // 表单认证规则
-      rules: {},
+      rules: {
+        email: [{
+          required: true, // 是否必选
+          message: this.$i18n.t('login.isEmpty'), // 校验文案
+          trigger: ['blur', 'change'] // 触发方式(失去焦点, 改值)
+        }, {
+          type: 'email', // 内建校验类型
+          message: this.$i18n.t('login.emailError'),
+          trigger: ['blur', 'change']
+        }],
+        phone: [{
+          validator: validatePhone, // 自定义校验（注意，callback 必须被调用）
+          trigger: ['blur', 'change']
+        }],
+        password: [{
+          validator: validatePassword,
+          trigger: ['blur', 'change']
+        }]
+      },
       language: PHONE_AREA_CODE_DEFAULT, // 默认手机号
       languages: [ // 手机号option列表
         { label: '+62', img: iconEnglish, value: '62' },
         { label: '+86', img: iconChinese, value: '86' }
-      ]
+      ],
+      passwd: 'password'
     }
   },
   methods: {
@@ -66,14 +115,44 @@ export default {
       this.loginChannel = code
     },
     initFromRules () {
-
+      // this.$nextTick(() => {
+      //   this.$refs.ruleForm.clearValidate()
+      // })
     },
-    formatPhone () {},
-    getByPhoneFun () {},
+    // 手机号只提取数字
+    formatPhone () {
+      // $set 向响应式对象中添加一个属性,并确保这个新属性同样是响应式的,且触发视图更新。 第一个参数: 表示数据源，即是你要操作的数组或者对象。第二个参数: 要操作的的字段。第三个参数: 更改的数据。
+      const phone = this.ruleForm.phone
+      this.$set(this.ruleForm, 'phone', phone.replace(/[^0-9]/ig, ''))
+    },
     // 设置语言的icon
     findLanguageImg () {
       const val = this.languages.find(v => v.value === this.language)
       return val ? val.img : iconEnglish
+    },
+    // 显示密码
+    showPassword () {
+      this.passwd === 'password' ? this.passwd = 'text' : this.passwd = 'password'
+    },
+    // 忘记密码
+    goForget () {
+      this.$router.push({
+        name: 'forgetPassword'
+      })
+    },
+    // 点击登录首先验证表单
+    submitForm (formName) {
+      // elementUI自带的校验表单的方法; 参数为一个回调函数, 在校验结束后触发
+      this.$refs[formName].validate((valid) => {
+        console.log(valid)
+        if (valid) {
+          console.log('成功通过表单验证')
+          this.$router.go(0) // 刷新当前页面
+        } else {
+          console.log('error submit!')
+          return false
+        }
+      })
     }
   }
 }
@@ -83,6 +162,10 @@ export default {
 .login_from {
   padding-top: 70px;
   position: relative;
+
+  .el-form-item {
+    margin-bottom: 14px;
+  }
 
   .select_login_try {
     width: 182px;
@@ -170,6 +253,22 @@ export default {
   ::v-deep .el-input-group--prepend >.el-input__inner {
     padding-left: 4px;
   }
+}
+
+.password {
+  ::v-deep .el-input__suffix {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+}
+
+.forget_password {
+  float: right;
+  color:#FA8E03;
+  cursor: pointer;
+  font-size:16px;
+  line-height: 15px;
 }
 
 </style>

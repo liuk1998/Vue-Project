@@ -40,3 +40,62 @@
     margin: 9px 7px 5px 4px;
   }
 }
+
+// input校验错误弹框
+.el-form-item {
+  // 错误弹框
+  .el-form-item__error {
+    padding: 4px 10px;
+    background-color: #FA8E03;
+    color: white;
+    border-radius: 6px;
+    top: -25px;
+    left: auto;
+    right: 0;
+    text-align: center;
+    font-size: 12px !important;
+    z-index: 2;
+  }
+  // 错误弹框前的动画亮片
+  .el-form-item__error::before {
+    content: ""; // 用于在元素的 ::before 和 ::after 伪元素中插入内容。使用content 属性插入的内容都是匿名的可替换元素。
+    position: absolute;
+    top: 0px;
+    left: -20px;
+    width: 20px;
+    height: 20px;
+    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, 0) 100%);
+    animation: 1s move infinite; // infinite无限循环
+  }
+  // 亮片动画
+  @keyframes move {
+    0% {
+      left: -20px;
+    }
+
+    100% {
+      left: 100%;
+    }
+  }
+  // 错误弹框小三角
+  .el-form-item__error::after {
+    content: ""; // 用于在元素的 ::before 和 ::after 伪元素中插入内容。使用content 属性插入的内容都是匿名的可替换元素。
+    position: absolute;
+    top: 15px;
+    left: calc(50% - 5px);
+    z-index: -1;
+    width: 8px;
+    height: 8px;
+    background-color: #FA8E03;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    /* IE 9 */
+    -moz-transform: rotate(45deg);
+    /* Firefox */
+    -webkit-transform: rotate(45deg);
+    /* Safari 和 Chrome */
+    -o-transform: rotate(45deg);
+    /* Opera */
+  }
+
+}

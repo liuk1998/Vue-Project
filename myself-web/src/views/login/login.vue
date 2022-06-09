@@ -26,6 +26,7 @@
           <div :class="['choose_tab', {'is_active': isLogin}]" @click="isLogin=true">{{ $t('login.login') }}</div>
           <div :class="['choose_tab', {'is_active': !isLogin}]" @click="isLogin=false">{{ $t('login.signUp') }}</div>
         </div>
+        <!-- 登录input组件 -->
         <login-input v-if="isLogin"></login-input>
       </div>
     </div>
@@ -67,7 +68,6 @@ export default {
     // 选择语言
     changeLanguage () {
       this.setLanguage()
-      console.log('选择语言')
     },
     // 设置语言的icon
     findLanguageImg () {
@@ -197,6 +197,21 @@ export default {
       ::v-deep .el-input__inner {
         height: 46px;
         font-size: 16px;
+      }
+
+      ::v-deep .el-button {
+        font-size: 18px;
+        font-weight: bold;
+        height: 46px;
+        width: 100%;
+        color: #fff;
+        background-color: #465FD2;
+        border-color: #465FD2;
+
+        &:hover {
+          background-color: #A2AFE8;
+          border-color: #A2AFE8;
+        }
       }
     }
   }
