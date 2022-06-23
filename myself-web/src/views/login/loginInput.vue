@@ -16,7 +16,7 @@
         <el-input v-model.trim="ruleForm.email" :placeholder="$t('login.email')" maxlength="50" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')"/>
       </el-form-item>
       <el-form-item v-else prop="phone" class="phone">
-        <el-input v-model.trim="ruleForm.phone" :placeholder="$t('login.phone')" maxlength="12" @input="formatPhone" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')">
+        <el-input v-model.trim="ruleForm.phone" :placeholder="$t('login.phone')" maxlength="13" @input="formatPhone" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')">
           <!-- prepend:代表放在紧贴在依赖组件的前面 -->
           <el-select slot="prepend" v-model="language" popper-class="language" @focus="initFromRules">
             <template #prefix>
@@ -57,19 +57,28 @@ export default {
   data () {
     // 自定义校验函数 -> 密码校验 (固定三个参数)
     const validatePassword = (rule, value, callback) => {
-      value === '' && callback(new Error(this.$i18n.t('login.isEmpty')));
-      (value.length < 8 || value.length > 30) && callback(new Error(this.$i18n.t('login.newPwd1')))
+      if (value === '') {
+        callback(new Error(this.$i18n.t('login.isEmpty')))
+      } else if (value.length < 8 || value.length > 30) {
+        callback(new Error(this.$i18n.t('login.newPwd1')))
+      } else {
+        callback()
+      }
     }
     // 自定义校验函数 -> 电话号校验 (固定三个参数)
     const validatePhone = (rule, value, callback) => {
-      value === '' && callback(new Error(this.$i18n.t('login.isEmpty')))
-      value.substr(0, 1) === '0' && callback(new Error(this.$t('login.phoneCheck')))
-      if (this.language === '86') {
+      if (value === '') {
+        callback(new Error(this.$i18n.t('login.isEmpty')))
+      } else if (value.substr(0, 1) === '0') {
+        callback(new Error(this.$t('login.phoneCheck')))
+      } else if (this.language === '86') {
         if (value.length !== 11) {
           callback(new Error(this.$i18n.t('login.phoneCnError')))
         }
       } else if (value.length < 8 || value.length > 13) {
         callback(new Error(this.$i18n.t('login.phoneIdError')))
+      } else {
+        callback()
       }
     }
     return {
