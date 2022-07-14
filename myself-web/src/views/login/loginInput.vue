@@ -51,6 +51,7 @@
 import { PHONE_AREA_CODE_DEFAULT } from '@/utils/constant'
 import iconEnglish from '@/assets/icon/pic_english.png' // 英文icon -> 切换语言
 import iconChinese from '@/assets/icon/pic_chinese.png' // 中文icon -> 切换语言
+// import axios from 'axios'
 
 export default {
   name: 'LoginInput',
@@ -118,10 +119,15 @@ export default {
       passwd: 'password' // 显示密码
     }
   },
+  mounted () {
+  },
   methods: {
     // 设置登录方式
     toggleLogin (code) {
       this.loginChannel = code
+      this.$set(this.ruleForm, 'email', '')
+      this.$set(this.ruleForm, 'phone', '')
+      this.$set(this.ruleForm, 'password', '')
     },
     initFromRules () {
       // this.$nextTick(() => {
@@ -156,7 +162,10 @@ export default {
         console.log(valid)
         if (valid) {
           console.log('成功通过表单验证')
-          this.$router.go(0) // 刷新当前页面
+          this.$store.dispatch('Login', this.ruleForm).then(res => {
+            console.log('res>>', res)
+          })
+          // this.$router.go(0) // 刷新当前页面
         } else {
           console.log('error submit!')
           return false

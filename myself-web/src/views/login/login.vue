@@ -193,6 +193,7 @@ export default {
 
     .login_info_from {
       padding-right: 50px;
+      padding-left: 50px;
 
       ::v-deep .el-input__inner {
         height: 46px;
