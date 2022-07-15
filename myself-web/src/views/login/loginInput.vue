@@ -51,7 +51,6 @@
 import { PHONE_AREA_CODE_DEFAULT } from '@/utils/constant'
 import iconEnglish from '@/assets/icon/pic_english.png' // 英文icon -> 切换语言
 import iconChinese from '@/assets/icon/pic_chinese.png' // 中文icon -> 切换语言
-// import axios from 'axios'
 
 export default {
   name: 'LoginInput',
@@ -72,10 +71,8 @@ export default {
         callback(new Error(this.$i18n.t('login.isEmpty')))
       } else if (value.substr(0, 1) === '0') {
         callback(new Error(this.$t('login.phoneCheck')))
-      } else if (this.language === '86') {
-        if (value.length !== 11) {
-          callback(new Error(this.$i18n.t('login.phoneCnError')))
-        }
+      } else if (this.language === '86' && value.length !== 11) {
+        callback(new Error(this.$i18n.t('login.phoneCnError')))
       } else if (value.length < 8 || value.length > 13) {
         callback(new Error(this.$i18n.t('login.phoneIdError')))
       } else {
@@ -162,15 +159,32 @@ export default {
         console.log(valid)
         if (valid) {
           console.log('成功通过表单验证')
-          this.$store.dispatch('Login', this.ruleForm).then(res => {
-            console.log('res>>', res)
-          })
+          this.LoginGo()
           // this.$router.go(0) // 刷新当前页面
         } else {
           console.log('error submit!')
           return false
         }
       })
+    },
+    // 登录接口
+    async LoginGo () {
+      const params = {
+        password: this.ruleForm.password,
+        loginChannel: this.loginChannel
+      }
+      if (this.loginChannel === 0) {
+        this.$store.dispatch('Login', { ...params, email: this.ruleForm.email }).then(res => {
+          console.log('res>>', res)
+        }).catch(err => {
+          console.error('err>>', err)
+        })
+      } else {
+        const phone = '+' + this.language + this.ruleForm.phone
+        this.$store.dispatch('Login', { ...params, phone: phone }).then(res => {
+          console.log('res>>', res)
+        })
+      }
     }
   }
 }
