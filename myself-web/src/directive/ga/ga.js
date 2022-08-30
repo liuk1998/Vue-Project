@@ -16,7 +16,7 @@ export default {
    */
   bind (el, binding) {
     el.addEventListener('click', () => {
-      console.log('自定义指令v-ga', el, binding)
+      // console.log('自定义指令v-ga', el, binding)
       // const { eventCategory, eventAction, eventLabel, eventValue } = binding.value
       // if (window.gtag) {
       //   window.gtag('event', eventAction, {

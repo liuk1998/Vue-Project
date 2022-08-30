@@ -1,11 +1,3 @@
-/*
- * @Author: liuk kekeliu_job@163.com
- * @Date: 2022-07-01 21:04:14
- * @LastEditors: liuk kekeliu_job@163.com
- * @LastEditTime: 2022-07-15 14:16:40
- * @FilePath: /myself-web/src/store/modules/user.js
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 import { login } from '@/api/login'
 import { getToken } from '@/utils/auth'
 

@@ -1,5 +1,6 @@
 <template>
   <div class="box">
+    <!-- 国际化 -->
     <div class="login_language">
       <!-- elementUI Select选择器(下拉列表) -->
       <!-- v-model:绑定值;  popper-class:Select下拉框的类名;  change:选中值发生变化时触发;  prefix:插槽,Select组件头部内容  -->
@@ -14,6 +15,7 @@
         </el-option>
       </el-select>
     </div>
+    <!-- 登录 -->
     <div class="login_box">
       <div class="login_logo">
         <span class="login_tips">{{ $t('login.welcome') }}</span>
@@ -91,6 +93,7 @@ export default {
   min-width: 1050px;
   min-height: 700px;
 
+  // 国际化
   .login_language {
     position: absolute;
     top: 32px;
@@ -119,9 +122,11 @@ export default {
     }
   }
 
+  // 登录
   .login_box {
     display: flex;
     min-height: 550px;
+    margin-top: 10%;
 
     .login_logo {
       width: 495px;
@@ -194,6 +199,7 @@ export default {
     .login_info_from {
       padding-right: 50px;
       padding-left: 50px;
+      padding-top: 30px;
 
       ::v-deep .el-input__inner {
         height: 46px;

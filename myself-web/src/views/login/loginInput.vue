@@ -13,12 +13,12 @@
         <!-- elementUI Input输入框 -->
         <!-- v-model:绑定值; -->
         <!-- .native就是把组件标签变回原生DOM的一种方式，相当于给组件绑定原生事件。给普通的HTML标签监听一个事件，之后添加 .native 修饰符是不会起作用的。 -->
-        <el-input v-model.trim="ruleForm.email" :placeholder="$t('login.email')" maxlength="50" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')"/>
+        <el-input v-model.trim="ruleForm.email" :placeholder="$t('login.email')" maxlength="50" @keyup.enter.native="submitForm('ruleForm')"/>
       </el-form-item>
       <el-form-item v-else prop="phone" class="phone">
-        <el-input v-model.trim="ruleForm.phone" :placeholder="$t('login.phone')" maxlength="13" @input="formatPhone" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')">
+        <el-input v-model.trim="ruleForm.phone" :placeholder="$t('login.phone')" maxlength="13" @input="formatPhone" @keyup.enter.native="submitForm('ruleForm')">
           <!-- prepend:代表放在紧贴在依赖组件的前面 -->
-          <el-select slot="prepend" v-model="language" popper-class="language" @focus="initFromRules">
+          <el-select slot="prepend" v-model="language" popper-class="language">
             <template #prefix>
               <img :src="findLanguageImg()" alt="">
             </template>
@@ -30,12 +30,13 @@
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="ruleForm.password" :type="passwd" class="password" :placeholder="$t('login.password')" maxlength="30" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')">
+        <el-input v-model="ruleForm.password" :type="passwd" class="password" :placeholder="$t('login.password')" maxlength="30" @keyup.enter.native="submitForm('ruleForm')">
           <!-- suffix:代表放在紧贴在依赖组件的后面 -->
-          <i v-if="ruleForm.password != ''" slot="suffix" class="el-icon-view" @click="showPassword"></i>
+          <img v-if="ruleForm.password != '' && passwd === 'text'" slot="suffix" src="../../assets/icon/eye.svg" alt="" @click="showPassword" class="eye-img">
+          <img v-if="ruleForm.password != '' && passwd === 'password'" slot="suffix" src="../../assets/icon/closeEye.svg" alt="" @click="showPassword" class="eye-img">
         </el-input>
       </el-form-item>
-      <el-form-item prop="type">
+      <el-form-item>
         <div class="forget_password" @click="goForget">{{ $t('login.forgetPassword') }}</div>
       </el-form-item>
       <el-form-item>
@@ -85,8 +86,7 @@ export default {
       ruleForm: {
         email: '',
         password: '',
-        phone: '',
-        type: false
+        phone: ''
       },
       // 表单认证规则
       rules: {
@@ -126,11 +126,6 @@ export default {
       this.$set(this.ruleForm, 'phone', '')
       this.$set(this.ruleForm, 'password', '')
     },
-    initFromRules () {
-      // this.$nextTick(() => {
-      //   this.$refs.ruleForm.clearValidate()
-      // })
-    },
     // 手机号只提取数字
     formatPhone () {
       // $set 向响应式对象中添加一个属性,并确保这个新属性同样是响应式的,且触发视图更新。 第一个参数: 表示数据源，即是你要操作的数组或者对象。第二个参数: 要操作的的字段。第三个参数: 更改的数据。
@@ -144,7 +139,7 @@ export default {
     },
     // 显示密码
     showPassword () {
-      this.passwd === 'password' ? this.passwd = 'text' : this.passwd = 'password'
+      this.passwd = this.passwd === 'password' ? 'text' : 'password'
     },
     // 忘记密码
     goForget () {
@@ -156,11 +151,9 @@ export default {
     submitForm (formName) {
       // elementUI自带的校验表单的方法; 参数为一个回调函数, 在校验结束后触发
       this.$refs[formName].validate((valid) => {
-        console.log(valid)
         if (valid) {
           console.log('成功通过表单验证')
           this.LoginGo()
-          // this.$router.go(0) // 刷新当前页面
         } else {
           console.log('error submit!')
           return false
@@ -175,14 +168,16 @@ export default {
       }
       if (this.loginChannel === 0) {
         this.$store.dispatch('Login', { ...params, email: this.ruleForm.email }).then(res => {
-          console.log('res>>', res)
+          console.log('邮箱登录成功>>', res)
         }).catch(err => {
-          console.error('err>>', err)
+          console.error('邮箱登录失败>>', err)
         })
       } else {
         const phone = '+' + this.language + this.ruleForm.phone
         this.$store.dispatch('Login', { ...params, phone: phone }).then(res => {
-          console.log('res>>', res)
+          console.log('手机登录成功>>', res)
+        }).catch(err => {
+          console.error('手机登录失败>>', err)
         })
       }
     }
@@ -292,6 +287,10 @@ export default {
     display: flex;
     align-items: center;
     margin-right: 10px;
+  }
+
+  .eye-img {
+    width: 20px;
   }
 }
 
