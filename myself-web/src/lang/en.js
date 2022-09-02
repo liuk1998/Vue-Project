@@ -14,6 +14,11 @@ export default {
     phoneCheck: 'Phone numbers cannot start with 0.',
     emailError: 'Invalid Email Format',
     loginErr: 'Login failed, account password is incorrect.',
-    loginSuccess: 'Login successful, welcome to the system.'
+    loginSuccess: 'Login successful, welcome to the system.',
+    verification: 'Verification Code',
+    send: 'Send',
+    newPwd2: 'Password should contain 8-30 letters',
+    confirmPassword: 'Confirm Password',
+    accountName: 'Name'
   }
 }

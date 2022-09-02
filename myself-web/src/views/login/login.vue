@@ -30,6 +30,8 @@
         </div>
         <!-- 登录input组件 -->
         <login-input v-if="isLogin"></login-input>
+        <!-- 注册input组件 -->
+        <register-input v-else></register-input>
       </div>
     </div>
   </div>
@@ -40,13 +42,15 @@ import { DEFAULT_LANGUAGE } from '@/utils/constant' // 默认语言
 import iconEnglish from '@/assets/icon/pic_english.png' // 英文icon -> 切换语言
 import iconChinese from '@/assets/icon/pic_chinese.png' // 中文icon -> 切换语言
 import LoginInput from './loginInput.vue' // 引入登录input组件
+import RegisterInput from './registerInput' // 引入注册input组件
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Login',
   // 组件
   components: {
-    LoginInput
+    LoginInput,
+    RegisterInput
   },
   data () {
     return {
