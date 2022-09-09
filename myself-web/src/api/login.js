@@ -9,6 +9,15 @@ export function login (data) {
   })
 }
 
+// 注册
+export function register (data) {
+  return request({
+    url: '/user/register',
+    method: 'post',
+    data: data
+  })
+}
+
 // 获取用户信息
 export function getInfo (token) {
   return request({

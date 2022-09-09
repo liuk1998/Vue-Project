@@ -46,9 +46,6 @@
         </el-form-item>
       </div>
     </el-form>
-    <div @click="refreshCode">
-      <VerifcationCode :code="code"></VerifcationCode>
-    </div>
   </div>
 </template>
 
@@ -58,6 +55,7 @@ import iconEnglish from '@/assets/icon/pic_english.png' // 英文icon -> 切换�
 import iconChinese from '@/assets/icon/pic_chinese.png' // 中文icon -> 切换语言
 import VerifcationCode from '@/components/register/verificationCode.vue'
 import { randomNum } from '@/utils/index' // 公共方法
+import { register } from '@/api/login'
 
 export default {
   name: 'RegisterInput',
@@ -89,6 +87,16 @@ export default {
         callback()
       }
     }
+    // 自定义校验函数 -> 确认密码校验
+    const validateSurePassword = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$i18n.t('login.isEmpty')))
+      } else if (value !== this.ruleForm.password) {
+        callback(new Error(this.$i18n.t('login.passwordDiff')))
+      } else {
+        callback()
+      }
+    }
     return {
       // 表单认证信息
       ruleForm: {
@@ -113,7 +121,7 @@ export default {
         }],
         name: [{ required: true, message: this.$i18n.t('login.isEmpty'), trigger: ['blur', 'change'] }],
         password: [{ validator: validatePassword, trigger: ['blur', 'change'] }],
-        surePassword: [{ required: true, message: this.$i18n.t('login.isEmpty'), trigger: ['blur', 'change'] }],
+        surePassword: [{ validator: validateSurePassword, trigger: ['blur', 'change'] }],
         authCode: [{ required: true, message: this.$i18n.t('login.isEmpty'), trigger: ['blur', 'change'] }]
       },
       language: PHONE_AREA_CODE_DEFAULT, // 默认手机号
@@ -126,6 +134,9 @@ export default {
       surePasswd: 'password', // 显示确认密码
       code: '1314' // 图片验证码数字
     }
+  },
+  mounted () {
+    this.refreshCode()
   },
   methods: {
     // 手机号只提取数字
@@ -165,12 +176,27 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log('成功通过表单验证')
+          this.signUp()
         } else {
           console.log('error submit!')
           return false
         }
       })
+    },
+    // 注册接口
+    async signUp () {
+      const phone = '+' + this.language + this.ruleForm.phone
+      if (this.ruleForm.authCode !== this.code) {
+        // elementUI Message消息提示
+        this.$message.error(this.$i18n.t('login.codeCheck'))
+        return
+      }
+      try {
+        const { code } = await register({ ...this.ruleForm, phone })
+        console.log('注册2', code)
+      } catch (err) {
+        console.error(err)
+      }
     }
   }
 }

@@ -5,18 +5,21 @@ import i18n from '@/lang/index'
 const emailList = {
   'niushanshan001@gmail.com': {
     password: '11111111',
-    loginChannel: 0
+    loginChannel: 0,
+    name: 'niushanshan'
   }
 }
 // 手机号登录
 const phoneList = {
   '+8618342214686': {
     password: '11111111',
-    loginChannel: 1
+    loginChannel: 1,
+    name: 'liuk'
   },
   '+8613644093298': {
     password: '11111111',
-    loginChannel: 1
+    loginChannel: 1,
+    name: 'liuYanQ'
   }
 }
 
@@ -40,6 +43,31 @@ export default {
       return {
         code: 'ERROR',
         message: i18n.t('login.loginErr')
+      }
+    }
+  },
+  // 注册
+  registerByUsername: config => {
+    const data = JSON.parse(config.body)
+    if (!Object.keys(emailList).includes(data.email) && !Object.keys(phoneList).includes(data.phone)) {
+      emailList[data.email] = { password: data.password, loginChannel: 0, name: data.name }
+      phoneList[data.phone] = { password: data.password, loginChannel: 1, name: data.name }
+      return {
+        code: 0,
+        data: null,
+        message: i18n.t('login.registerSuccess')
+      }
+    } else if (Object.keys(emailList).includes(data.email)) {
+      return {
+        code: 1,
+        data: null,
+        message: i18n.t('login.emailTips')
+      }
+    } else if (Object.keys(phoneList).includes(data.phone)) {
+      return {
+        code: 1,
+        data: null,
+        message: i18n.t('login.phoneTipsRepeated')
       }
     }
   },

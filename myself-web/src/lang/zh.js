@@ -19,6 +19,11 @@ export default {
     send: '发送',
     newPwd2: '密码必须为8位-30位之间。',
     confirmPassword: '确认密码',
-    accountName: '您的名称'
+    accountName: '您的名称',
+    codeCheck: '验证码不正确',
+    registerSuccess: '注册成功',
+    phoneTipsRepeated: '号码重复，请重新输入！',
+    emailTips: '您已经有一个与此电子邮箱地址关联的帐户。',
+    passwordDiff: '两次输入密码不一致'
   }
 }

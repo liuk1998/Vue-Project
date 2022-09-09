@@ -19,6 +19,11 @@ export default {
     send: 'Send',
     newPwd2: 'Password should contain 8-30 letters',
     confirmPassword: 'Confirm Password',
-    accountName: 'Name'
+    accountName: 'Name',
+    codeCheck: 'Incorrect verification code',
+    registerSuccess: 'login was successful',
+    phoneTipsRepeated: 'The Phone Number is already registered, please try again with different number',
+    emailTips: 'You already have an account associated with this e-mail address.',
+    passwordDiff: 'The passwords entered are not same'
   }
 }
