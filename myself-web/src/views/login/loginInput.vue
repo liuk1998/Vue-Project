@@ -13,12 +13,12 @@
         <!-- elementUI Input输入框 -->
         <!-- v-model:绑定值; -->
         <!-- .native就是把组件标签变回原生DOM的一种方式，相当于给组件绑定原生事件。给普通的HTML标签监听一个事件，之后添加 .native 修饰符是不会起作用的。 -->
-        <el-input v-model.trim="ruleForm.email" :placeholder="$t('login.email')" maxlength="50" @keyup.enter.native="submitForm('ruleForm')"/>
+        <el-input v-model.trim="ruleForm.email" :placeholder="$t('login.email')" maxlength="50" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')"/>
       </el-form-item>
       <el-form-item v-else prop="phone" class="phone">
-        <el-input v-model.trim="ruleForm.phone" :placeholder="$t('login.phone')" maxlength="13" @input="formatPhone" @keyup.enter.native="submitForm('ruleForm')">
+        <el-input v-model.trim="ruleForm.phone" :placeholder="$t('login.phone')" maxlength="13" @input="formatPhone" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')">
           <!-- prepend:代表放在紧贴在依赖组件的前面 -->
-          <el-select slot="prepend" v-model="language" popper-class="language">
+          <el-select slot="prepend" v-model="language" popper-class="language" @focus="initFromRules">
             <template #prefix>
               <img :src="findLanguageImg()" alt="">
             </template>
@@ -30,7 +30,7 @@
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="ruleForm.password" :type="passwd" class="password" :placeholder="$t('login.password')" maxlength="30" @keyup.enter.native="submitForm('ruleForm')">
+        <el-input v-model="ruleForm.password" :type="passwd" class="password" :placeholder="$t('login.password')" maxlength="30" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')">
           <!-- suffix:代表放在紧贴在依赖组件的后面 -->
           <img v-if="ruleForm.password != '' && passwd === 'text'" slot="suffix" src="../../assets/icon/eye.svg" alt="" @click="showPassword" class="eye-img">
           <img v-if="ruleForm.password != '' && passwd === 'password'" slot="suffix" src="../../assets/icon/closeEye.svg" alt="" @click="showPassword" class="eye-img">
@@ -117,6 +117,7 @@ export default {
     }
   },
   mounted () {
+    this.initFromRules()
   },
   methods: {
     // 设置登录方式
@@ -125,6 +126,7 @@ export default {
       this.$set(this.ruleForm, 'email', '')
       this.$set(this.ruleForm, 'phone', '')
       this.$set(this.ruleForm, 'password', '')
+      this.initFromRules()
     },
     // 手机号只提取数字
     formatPhone () {
@@ -145,6 +147,12 @@ export default {
     goForget () {
       this.$router.push({ // 跳转页面
         name: 'forgetPassword'
+      })
+    },
+    // 移除表单验证(结果)
+    initFromRules () {
+      this.$nextTick(() => {
+        this.$refs.ruleForm.clearValidate()
       })
     },
     // 点击登录首先验证表单

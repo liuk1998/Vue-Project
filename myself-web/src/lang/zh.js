@@ -24,6 +24,7 @@ export default {
     registerSuccess: '注册成功',
     phoneTipsRepeated: '号码重复，请重新输入！',
     emailTips: '您已经有一个与此电子邮箱地址关联的帐户。',
-    passwordDiff: '两次输入密码不一致'
+    passwordDiff: '两次输入密码不一致',
+    forgetPasswordTitle: '忘记密码'
   }
 }

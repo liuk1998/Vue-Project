@@ -24,6 +24,7 @@ export default {
     registerSuccess: 'login was successful',
     phoneTipsRepeated: 'The Phone Number is already registered, please try again with different number',
     emailTips: 'You already have an account associated with this e-mail address.',
-    passwordDiff: 'The passwords entered are not same'
+    passwordDiff: 'The passwords entered are not same',
+    forgetPasswordTitle: 'Forget Password'
   }
 }

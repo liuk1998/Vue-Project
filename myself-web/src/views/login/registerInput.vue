@@ -3,8 +3,8 @@
     <el-form ref="ruleForm" :model="ruleForm" :rules="rules" label-width="100px">
       <div class="login_email">
         <el-form-item prop="phone" class="phone">
-          <el-input v-model.trim="ruleForm.phone" :placeholder="$t('login.phone')" maxlength="13" @input="formatPhone" @keyup.enter.native="submitForm('ruleForm')">
-            <el-select slot="prepend" v-model="language" popper-class="language">
+          <el-input v-model.trim="ruleForm.phone" :placeholder="$t('login.phone')" maxlength="13" @input="formatPhone" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')">
+            <el-select slot="prepend" v-model="language" popper-class="language" @focus="initFromRules">
               <template #prefix>
                 <img :src="findLanguageImg()" alt="">
               </template>
@@ -16,30 +16,30 @@
           </el-input>
         </el-form-item>
         <el-form-item prop="authCode">
-          <el-input v-model="ruleForm.authCode" :placeholder="$t('login.verification')" @input="onlyNumber" maxlength="4" @keyup.enter.native="submitForm('ruleForm')">
+          <el-input v-model="ruleForm.authCode" :placeholder="$t('login.verification')" @input="onlyNumber" @focus="initFromRules" maxlength="4" @keyup.enter.native="submitForm('ruleForm')">
             <div @click="refreshCode" slot="suffix">
               <VerifcationCode :code="code"></VerifcationCode>
             </div>
           </el-input>
         </el-form-item>
         <el-form-item prop="email">
-          <el-input v-model="ruleForm.email" :placeholder="$t('login.email')" maxlength="50" @keyup.enter.native="submitForm('ruleForm')" />
+          <el-input v-model="ruleForm.email" :placeholder="$t('login.email')" @focus="initFromRules" maxlength="50" @keyup.enter.native="submitForm('ruleForm')" />
         </el-form-item>
         <el-form-item prop="password">
-          <el-input v-model="ruleForm.password" :type="passwd" :placeholder="$t('login.newPwd2')" maxlength="30" @keyup.enter.native="submitForm('ruleForm')" class="password">
+          <el-input v-model="ruleForm.password" :type="passwd" :placeholder="$t('login.newPwd2')" maxlength="30" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')" class="password">
             <!-- suffix:代表放在紧贴在依赖组件的后面 -->
           <img v-if="ruleForm.password != '' && passwd === 'text'" slot="suffix" src="../../assets/icon/eye.svg" alt="" @click="showPassword" class="eye-img">
           <img v-if="ruleForm.password != '' && passwd === 'password'" slot="suffix" src="../../assets/icon/closeEye.svg" alt="" @click="showPassword" class="eye-img">
           </el-input>
         </el-form-item>
         <el-form-item prop="surePassword">
-          <el-input v-model="ruleForm.surePassword" :type="surePasswd" :placeholder="$t('login.confirmPassword')" maxlength="30" @keyup.enter.native="submitForm('ruleForm')" class="password">
+          <el-input v-model="ruleForm.surePassword" :type="surePasswd" :placeholder="$t('login.confirmPassword')" maxlength="30" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')" class="password">
           <img v-if="ruleForm.surePassword != '' && surePasswd === 'text'" slot="suffix" src="../../assets/icon/eye.svg" alt="" @click="showSurePassword" class="eye-img">
           <img v-if="ruleForm.surePassword != '' && surePasswd === 'password'" slot="suffix" src="../../assets/icon/closeEye.svg" alt="" @click="showSurePassword" class="eye-img">
           </el-input>
         </el-form-item>
         <el-form-item prop="name">
-          <el-input v-model="ruleForm.name" :placeholder="$t('login.accountName')" maxlength="30" @keyup.enter.native="submitForm('ruleForm')" />
+          <el-input v-model="ruleForm.name" :placeholder="$t('login.accountName')" maxlength="30" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')">{{ $t('login.signUp') }}</el-button>
@@ -156,10 +156,12 @@ export default {
     },
     // 显示密码
     showPassword () {
+      this.initFromRules()
       this.passwd = this.passwd === 'password' ? 'text' : 'password'
     },
     // 显示确认密码
     showSurePassword () {
+      this.initFromRules()
       this.surePasswd = this.surePasswd === 'password' ? 'text' : 'password'
     },
     // 生成验证码数字
@@ -171,6 +173,12 @@ export default {
     refreshCode () {
       this.code = ''
       this.makeCode()
+    },
+    // 移除表单验证(结果)
+    initFromRules () {
+      this.$nextTick(() => {
+        this.$refs.ruleForm.clearValidate()
+      })
     },
     // 点击注册首先验证表单
     submitForm (formName) {

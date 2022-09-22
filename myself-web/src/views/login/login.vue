@@ -161,7 +161,7 @@ export default {
 
         // 伪类 CSS3写法 &代表它的上一级的 class 名字 ---> 这里指的是 login_tab
         &::after { // 在类名为login_tab的元素的内容之后插入新内容
-          content: ""; // 用于在元素的 ::before 和 ::after 伪元素中插入内容。使用content 属性插入的内容都是匿名的可替换元素。
+          content: ""; // 用于在元素的 ::before 和 ::after 伪元素中插入内容。使用 content 属性插入的内容都是匿名的可替换元素。
           position: absolute;
           left: 0;
           bottom: 0;
@@ -203,7 +203,7 @@ export default {
     .login_info_from {
       padding-right: 50px;
       padding-left: 50px;
-      padding-top: 30px;
+      // padding-top: 30px;
 
       ::v-deep .el-input__inner {
         height: 46px;
