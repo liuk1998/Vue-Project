@@ -97,5 +97,10 @@
     -o-transform: rotate(45deg);
     /* Opera */
   }
+}
 
+// button类型样式
+.el-button--warning {
+  background-color: #FA8E03;
+  border-color: #FA8E03;
 }

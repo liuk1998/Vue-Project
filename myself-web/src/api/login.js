@@ -18,6 +18,15 @@ export function register (data) {
   })
 }
 
+// 忘记密码
+export function forgetPassword (data) {
+  return request({
+    url: '/user/password-check',
+    method: 'post',
+    data
+  })
+}
+
 // 获取用户信息
 export function getInfo (token) {
   return request({

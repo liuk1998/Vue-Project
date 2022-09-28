@@ -8,7 +8,7 @@
     <!-- ref:获取该表单的form组件;  model:表单数据对象;  validate-on-rule-change:是否在rules属性改变后立即触发一次验证;  rules:表单验证规则; -->
     <el-form ref="ruleForm" :model="ruleForm" :validate-on-rule-change="false" :rules="rules">
       <!-- elementUI Form表单的子元素 -->
-      <!-- prop:表单域model字段;  -->
+      <!-- prop:表单域model字段; 在使用 validate、resetFields 方法的情况下，该属性是必填的 -->
       <el-form-item v-if="loginChannel === 0" prop="email">
         <!-- elementUI Input输入框 -->
         <!-- v-model:绑定值; -->
@@ -117,6 +117,13 @@ export default {
     }
   },
   mounted () {
+    // 根据传入的登录方式来变换tab
+    const { byChannel } = this.$route.query
+    if (byChannel === 'phone') {
+      this.loginChannel = 1
+    } else if (byChannel === 'email') {
+      this.loginChannel = 0
+    }
     this.initFromRules()
   },
   methods: {
@@ -146,7 +153,10 @@ export default {
     // 忘记密码
     goForget () {
       this.$router.push({ // 跳转页面
-        name: 'forgetPassword'
+        name: 'forgetPassword',
+        query: {
+          byChannel: this.loginChannel === 1 ? 'phone' : 'email' // 传入登录方式
+        }
       })
     },
     // 移除表单验证(结果)
@@ -245,6 +255,7 @@ export default {
 
   ::v-deep .el-input__inner, .el-input__inner {
     box-shadow: 0 0 0px 1000px #f9f6f4 inset;
+    transition: .3s;
   }
 }
 

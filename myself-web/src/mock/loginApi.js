@@ -1,26 +1,13 @@
 import { paramsObj } from '@/utils/index'
 import i18n from '@/lang/index'
 
-// 邮箱登录
-const emailList = {
-  'niushanshan001@gmail.com': {
-    password: '11111111',
-    loginChannel: 0,
-    name: 'niushanshan'
-  }
-}
-// 手机号登录
-const phoneList = {
-  '+8618342214686': {
-    password: '11111111',
-    loginChannel: 1,
-    name: 'liuk'
-  },
-  '+8613644093298': {
-    password: '11111111',
-    loginChannel: 1,
-    name: 'liuYanQ'
-  }
+const emailList = JSON.parse(localStorage.emailList)
+const phoneList = JSON.parse(localStorage.phoneList)
+
+// 设置 localStorage 的登录信息
+function setEmailOrPhone () {
+  localStorage.emailList = JSON.stringify(emailList)
+  localStorage.phoneList = JSON.stringify(phoneList)
 }
 
 export default {
@@ -52,6 +39,7 @@ export default {
     if (!Object.keys(emailList).includes(data.email) && !Object.keys(phoneList).includes(data.phone)) {
       emailList[data.email] = { password: data.password, loginChannel: 0, name: data.name }
       phoneList[data.phone] = { password: data.password, loginChannel: 1, name: data.name }
+      setEmailOrPhone()
       return {
         code: 0,
         data: null,
@@ -68,6 +56,35 @@ export default {
         code: 1,
         data: null,
         message: i18n.t('login.phoneTipsRepeated')
+      }
+    }
+  },
+  // 忘记密码
+  forgetPassword: config => {
+    const data = JSON.parse(config.body)
+    if (Object.keys(emailList).includes(data.email) || Object.keys(phoneList).includes(data.phone)) {
+      if (Object.keys(emailList).includes(data.email)) {
+        emailList[data.email] = { password: data.password, loginChannel: 0, name: data.name }
+      } else if (Object.keys(phoneList).includes(data.phone)) {
+        phoneList[data.phone] = { password: data.password, loginChannel: 1, name: data.name }
+      }
+      setEmailOrPhone()
+      return {
+        code: 0,
+        data: null,
+        message: i18n.t('login.passwordChangedSuccessfully')
+      }
+    } else if (!Object.keys(emailList).includes(data.email) && data.channel === 1) {
+      return {
+        code: 1,
+        data: null,
+        message: i18n.t('login.emailNotRegistered')
+      }
+    } else if (!Object.keys(phoneList).includes(data.phone) && data.channel === 0) {
+      return {
+        code: 1,
+        data: null,
+        message: i18n.t('login.phoneNotRegistered')
       }
     }
   },

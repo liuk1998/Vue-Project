@@ -25,6 +25,12 @@ export default {
     phoneTipsRepeated: 'The Phone Number is already registered, please try again with different number',
     emailTips: 'You already have an account associated with this e-mail address.',
     passwordDiff: 'The passwords entered are not same',
-    forgetPasswordTitle: 'Forget Password'
+    forgetPasswordTitle: 'Forget Password',
+    newPassword: 'New Password',
+    confirm: 'Confirm',
+    goBack: 'Go Back',
+    emailNotRegistered: 'Email Not Registered',
+    phoneNotRegistered: 'Phone Not Registered',
+    passwordChangedSuccessfully: 'Password changed successfully'
   }
 }

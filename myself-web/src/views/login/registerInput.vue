@@ -28,14 +28,14 @@
         <el-form-item prop="password">
           <el-input v-model="ruleForm.password" :type="passwd" :placeholder="$t('login.newPwd2')" maxlength="30" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')" class="password">
             <!-- suffix:代表放在紧贴在依赖组件的后面 -->
-          <img v-if="ruleForm.password != '' && passwd === 'text'" slot="suffix" src="../../assets/icon/eye.svg" alt="" @click="showPassword" class="eye-img">
-          <img v-if="ruleForm.password != '' && passwd === 'password'" slot="suffix" src="../../assets/icon/closeEye.svg" alt="" @click="showPassword" class="eye-img">
+            <img v-if="ruleForm.password != '' && passwd === 'text'" slot="suffix" src="../../assets/icon/eye.svg" alt="" @click="showPassword" class="eye-img">
+            <img v-if="ruleForm.password != '' && passwd === 'password'" slot="suffix" src="../../assets/icon/closeEye.svg" alt="" @click="showPassword" class="eye-img">
           </el-input>
         </el-form-item>
         <el-form-item prop="surePassword">
           <el-input v-model="ruleForm.surePassword" :type="surePasswd" :placeholder="$t('login.confirmPassword')" maxlength="30" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')" class="password">
-          <img v-if="ruleForm.surePassword != '' && surePasswd === 'text'" slot="suffix" src="../../assets/icon/eye.svg" alt="" @click="showSurePassword" class="eye-img">
-          <img v-if="ruleForm.surePassword != '' && surePasswd === 'password'" slot="suffix" src="../../assets/icon/closeEye.svg" alt="" @click="showSurePassword" class="eye-img">
+            <img v-if="ruleForm.surePassword != '' && surePasswd === 'text'" slot="suffix" src="../../assets/icon/eye.svg" alt="" @click="showSurePassword" class="eye-img">
+            <img v-if="ruleForm.surePassword != '' && surePasswd === 'password'" slot="suffix" src="../../assets/icon/closeEye.svg" alt="" @click="showSurePassword" class="eye-img">
           </el-input>
         </el-form-item>
         <el-form-item prop="name">
@@ -129,7 +129,6 @@ export default {
         { label: '+62', img: iconEnglish, value: '62' },
         { label: '+86', img: iconChinese, value: '86' }
       ],
-      resendSecond: 0, // 验证码发送倒计时
       passwd: 'password', // 显示密码
       surePasswd: 'password', // 显示确认密码
       code: '1314' // 图片验证码数字
@@ -137,6 +136,7 @@ export default {
   },
   mounted () {
     this.refreshCode()
+    this.initFromRules()
   },
   methods: {
     // 手机号只提取数字
@@ -197,12 +197,14 @@ export default {
       if (this.ruleForm.authCode !== this.code) {
         // elementUI Message消息提示
         this.$message.error(this.$i18n.t('login.codeCheck'))
+        this.refreshCode()
         return
       }
       try {
         const { code } = await register({ ...this.ruleForm, phone })
-        console.log('注册2', code)
+        code === 0 && console.log('注册成功!!!')
       } catch (err) {
+        this.refreshCode()
         console.error(err)
       }
     }
@@ -223,6 +225,7 @@ export default {
 
   ::v-deep .el-input__inner, .el-input__inner {
     box-shadow: 0 0 0px 1000px #f9f6f4 inset;
+    transition: .3s;
   }
 
   ::v-deep .el-input__suffix {
