@@ -37,8 +37,8 @@ export default {
   registerByUsername: config => {
     const data = JSON.parse(config.body)
     if (!Object.keys(emailList).includes(data.email) && !Object.keys(phoneList).includes(data.phone)) {
-      emailList[data.email] = { password: data.password, loginChannel: 0, name: data.name }
-      phoneList[data.phone] = { password: data.password, loginChannel: 1, name: data.name }
+      emailList[data.email] = { password: data.password, loginChannel: 0, name: data.name, phone: data.phone }
+      phoneList[data.phone] = { password: data.password, loginChannel: 1, name: data.name, email: data.email }
       setEmailOrPhone()
       return {
         code: 0,
@@ -64,9 +64,15 @@ export default {
     const data = JSON.parse(config.body)
     if (Object.keys(emailList).includes(data.email) || Object.keys(phoneList).includes(data.phone)) {
       if (Object.keys(emailList).includes(data.email)) {
-        emailList[data.email] = { password: data.password, loginChannel: 0, name: data.name }
+        emailList[data.email].password = data.password
+        for (const i in emailList) {
+          phoneList[i.phone].password = data.password
+        }
       } else if (Object.keys(phoneList).includes(data.phone)) {
-        phoneList[data.phone] = { password: data.password, loginChannel: 1, name: data.name }
+        phoneList[data.phone].password = data.password
+        for (const i in phoneList) {
+          emailList[i.email].password = data.password
+        }
       }
       setEmailOrPhone()
       return {
