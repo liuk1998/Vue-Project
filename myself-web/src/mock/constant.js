@@ -5,13 +5,15 @@ export const emailList = {
     password: '11111111',
     loginChannel: 0,
     name: 'liuK',
-    phone: '+8618342214686'
+    phone: '+8618342214686',
+    userId: '1'
   },
   '840927735@qq.com': {
     password: '11111111',
     loginChannel: 0,
     name: 'liuYanQ',
-    phone: '+8613644093298'
+    phone: '+8613644093298',
+    userId: '2'
   }
 }
 
@@ -21,20 +23,22 @@ export const phoneList = {
     password: '11111111',
     loginChannel: 1,
     name: 'liuK',
-    email: '157604279@qq.com'
+    email: '157604279@qq.com',
+    userId: '1'
   },
   '+8613644093298': {
     password: '11111111',
     loginChannel: 1,
     name: 'liuYanQ',
-    email: '840927735@qq.com'
+    email: '840927735@qq.com',
+    userId: '2'
   }
 }
 
 // 用户信息
 export const userInfo = [{
   username: 'liuK', // 用户名
-  userId: 1, // 用户id
+  userId: '1', // 用户id
   email: '157604279@qq.com',
   companyId: '1', // 公司id
   guidanceFlag: '1',
@@ -50,7 +54,7 @@ export const userInfo = [{
   }]
 }, {
   username: 'liuYanQ',
-  userId: 2,
+  userId: '2',
   email: '840927735@qq.com',
   companyId: null,
   guidanceFlag: '1',
@@ -58,20 +62,15 @@ export const userInfo = [{
   returnPageFlag: '1',
   noticeId: '44',
   promotionGuide: '1',
-  sysResources: [{
-    // appType: '00',
-    // componentName: 'dashboard',
-    // nameChinese: '看板',
-    // nameEnglish: 'DashBoard'
-  }]
+  sysResources: [{}]
 }]
 
 // 公司信息
 export const companyInfo = [{
   companyId: '1', // 公司id
   name: 'Stokis-LiuK', // 公司名称
-  guideStatus: 2, // 0 未激活， 1 需要引导  ，2已完成
+  guideStatus: 0, // 0 未激活， 1 需要引导  ，2已完成
   wmsStatusFlag: 0, // 入口权限的接口  1开启  0关闭
   logo: '', // 公司logo
-  guideCompleteIndex: '0' // 引导
+  guideCompleteIndex: '0' // 引导进入第几步
 }]

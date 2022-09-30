@@ -56,6 +56,7 @@ import Bus from '@/utils/bus'
 import { getInfo } from '@/api/login'
 import { getNewPaidOrderAfterLogin } from '@/api/order'
 import { getCompany } from '@/api/company'
+const Base64 = require('js-base64').Base64 // 引入密码加密
 
 export default {
   name: 'LoginInput',
@@ -129,7 +130,18 @@ export default {
     } else if (byChannel === 'email') {
       this.loginChannel = 0
     }
+    // 取消表单校验
     this.initFromRules()
+    // 记住密码
+    if (localStorage.username) {
+      if (this.loginChannel === 1) {
+        this.language = localStorage.username.substr(1, 2)
+        this.ruleForm.phone = localStorage.username.substr(3, 11)
+      } else if (this.loginChannel === 0) {
+        this.ruleForm.email = localStorage.username
+      }
+      this.ruleForm.password = Base64.decode(localStorage.password)
+    }
 
     console.log('Bus', Bus)
   },
@@ -195,7 +207,11 @@ export default {
           const { code, data } = res
           if (code === 0) {
             console.log('邮箱登录成功>>', data)
-            this.getUserInfo(data.name)
+            // 记住密码
+            localStorage.username = this.ruleForm.email
+            localStorage.password = Base64.encode(this.ruleForm.password)
+            // 获取用户信息
+            this.getUserInfo(data.userId)
           }
         }).catch(err => {
           console.error('邮箱登录失败>>', err)
@@ -206,7 +222,11 @@ export default {
           const { code, data } = res
           if (code === 0) {
             console.log('手机登录成功>>', data)
-            this.getUserInfo(data.name)
+            // 记住密码
+            localStorage.username = phone
+            localStorage.password = Base64.encode(this.ruleForm.password)
+            // 获取用户信息
+            this.getUserInfo(data.userId)
           }
         }).catch(err => {
           console.error('手机登录失败>>', err)
@@ -214,9 +234,9 @@ export default {
       }
     },
     // 获取用户信息
-    async getUserInfo (name) {
+    async getUserInfo (id) {
       try {
-        const { code, data } = await getInfo({ name: name })
+        const { code, data } = await getInfo({ userId: id })
         if (code === 0) {
           // 存储用户信息
           this.$store.commit('SET_USERINFO', data)
@@ -237,16 +257,32 @@ export default {
           // Bus.$emit('powerChange')
           // Bus.$emit('changeLefterNum')
 
-          // 查询是否有新的支付订单
-          this.checkNewOrder()
           // 判断是否有首页权限, 没有的话去欢迎页
           const dashboardSwitch = sysResources.find(v => v.componentName === 'dashboard')
           if (dashboardSwitch) {
             this.homePermission = true
           }
-          // 如果有公司id, 进入系统
-          if (data.companyId) {
-            this.enterSystem()
+          // 进入系统
+          this.enterSystem()
+        }
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    // 进入系统
+    async enterSystem () {
+      try {
+        const { code, data } = await getCompany({ id: this.$store.state.user.userInfo.companyId })
+        if (code === 0) {
+          // 存储公司信息
+          this.$store.commit('SET_COMPANY', data)
+          console.log('公司信息', data)
+          if (this.homePermission) {
+            // 查询是否有新的支付订单
+            this.checkNewOrder()
+            this.$router.push({ path: '/home' })
+          } else {
+            this.$router.push({ path: '/welcome' })
           }
         }
       } catch (err) {
@@ -263,19 +299,6 @@ export default {
             //   Bus.$emit('showNewOrder')
             // }, 1000)
           }
-        }
-      } catch (err) {
-        console.error(err)
-      }
-    },
-    // 进入系统
-    async enterSystem () {
-      try {
-        const { code, data } = await getCompany({ id: this.$store.state.user.userInfo.companyId })
-        if (code === 0) {
-          // 存储公司信息
-          this.$store.commit('SET_COMPANY', data)
-          console.log('公司信息', data)
         }
       } catch (err) {
         console.error(err)

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { PATH_NAME } from '@/utils/constant'
 
 Vue.use(VueRouter)
 
@@ -16,13 +17,13 @@ const routes = [
   },
   {
     path: '/home',
-    name: 'home',
-    component: () => import('@/views/HomeView.vue')
+    name: PATH_NAME.PATH_NAME_DASHBOARD.name,
+    component: () => import('@/views/home/index.vue')
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import('@/views/AboutView.vue')
+    path: '/welcome',
+    name: PATH_NAME.PATH_NAME_WELCOME.name,
+    component: () => import('@/views/home/welcome.vue')
   },
   {
     path: '/test',

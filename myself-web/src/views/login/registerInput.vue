@@ -55,7 +55,8 @@ import iconEnglish from '@/assets/icon/pic_english.png' // 英文icon -> 切换�
 import iconChinese from '@/assets/icon/pic_chinese.png' // 中文icon -> 切换语言
 import VerifcationCode from '@/components/register/verificationCode.vue'
 import { randomNum } from '@/utils/index' // 公共方法
-import { register } from '@/api/login'
+import { register, getInfo } from '@/api/login'
+const Base64 = require('js-base64').Base64 // 引入密码加密
 
 export default {
   name: 'RegisterInput',
@@ -201,10 +202,34 @@ export default {
         return
       }
       try {
-        const { code } = await register({ ...this.ruleForm, phone })
-        code === 0 && console.log('注册成功!!!')
+        const { code, data } = await register({ ...this.ruleForm, phone })
+        if (code === 0) {
+          // 记住密码
+          localStorage.username = phone
+          localStorage.password = Base64.encode(this.ruleForm.password)
+          // 获取用户信息
+          this.getUserInfo(data.userId)
+        }
       } catch (err) {
         this.refreshCode()
+        console.error(err)
+      }
+    },
+    // 获取用户信息
+    async getUserInfo (id) {
+      try {
+        const { code, data } = await getInfo({ userId: id })
+        if (code === 0) {
+          // 存储用户信息
+          this.$store.commit('SET_USERINFO', data)
+          console.log('用户信息', data)
+          // 配置权限
+          // Bus.$emit('powerChange')
+
+          // 进入系统
+          this.$router.push({ path: '/welcome' })
+        }
+      } catch (err) {
         console.error(err)
       }
     }
