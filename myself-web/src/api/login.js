@@ -5,7 +5,7 @@ export function login (data) {
   return request({
     url: '/user/login',
     method: 'post',
-    data: data
+    data
   })
 }
 
@@ -14,7 +14,7 @@ export function register (data) {
   return request({
     url: '/user/register',
     method: 'post',
-    data: data
+    data
   })
 }
 
@@ -28,10 +28,10 @@ export function forgetPassword (data) {
 }
 
 // 获取用户信息
-export function getInfo (token) {
+export function getInfo (params) {
   return request({
-    url: 'user/login',
+    url: '/user/info',
     method: 'get',
-    data: { token }
+    params
   })
 }

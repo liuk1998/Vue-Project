@@ -52,6 +52,10 @@
 import { PHONE_AREA_CODE_DEFAULT } from '@/utils/constant'
 import iconEnglish from '@/assets/icon/pic_english.png' // 英文icon -> 切换语言
 import iconChinese from '@/assets/icon/pic_chinese.png' // 中文icon -> 切换语言
+import Bus from '@/utils/bus'
+import { getInfo } from '@/api/login'
+import { getNewPaidOrderAfterLogin } from '@/api/order'
+import { getCompany } from '@/api/company'
 
 export default {
   name: 'LoginInput',
@@ -113,7 +117,8 @@ export default {
         { label: '+62', img: iconEnglish, value: '62' },
         { label: '+86', img: iconChinese, value: '86' }
       ],
-      passwd: 'password' // 显示密码
+      passwd: 'password', // 显示密码
+      homePermission: false // 是否拥有首页权限
     }
   },
   mounted () {
@@ -125,6 +130,8 @@ export default {
       this.loginChannel = 0
     }
     this.initFromRules()
+
+    console.log('Bus', Bus)
   },
   methods: {
     // 设置登录方式
@@ -170,7 +177,6 @@ export default {
       // elementUI自带的校验表单的方法; 参数为一个回调函数, 在校验结束后触发
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log('成功通过表单验证')
           this.LoginGo()
         } else {
           console.log('error submit!')
@@ -186,17 +192,93 @@ export default {
       }
       if (this.loginChannel === 0) {
         this.$store.dispatch('Login', { ...params, email: this.ruleForm.email }).then(res => {
-          console.log('邮箱登录成功>>', res)
+          const { code, data } = res
+          if (code === 0) {
+            console.log('邮箱登录成功>>', data)
+            this.getUserInfo(data.name)
+          }
         }).catch(err => {
           console.error('邮箱登录失败>>', err)
         })
       } else {
         const phone = '+' + this.language + this.ruleForm.phone
         this.$store.dispatch('Login', { ...params, phone: phone }).then(res => {
-          console.log('手机登录成功>>', res)
+          const { code, data } = res
+          if (code === 0) {
+            console.log('手机登录成功>>', data)
+            this.getUserInfo(data.name)
+          }
         }).catch(err => {
           console.error('手机登录失败>>', err)
         })
+      }
+    },
+    // 获取用户信息
+    async getUserInfo (name) {
+      try {
+        const { code, data } = await getInfo({ name: name })
+        if (code === 0) {
+          // 存储用户信息
+          this.$store.commit('SET_USERINFO', data)
+          console.log('用户信息', data)
+          // localStorage.username = data.username
+          // localStorage.userId = data.userId
+          // localStorage.companyId = data.companyId
+          // localStorage.guidanceFlag = data.guidanceFlag
+          // localStorage.orderPageFlag = data.orderPageFlag
+          // localStorage.returnPageFlag = data.returnPageFlag
+          // localStorage.noticeId = data.noticeId
+          // localStorage.promotionGuide = data.promotionGuide
+          // localStorage.email = data.email
+
+          // 配置权限
+          // localStorage.configure = JSON.stringify(data.sysResources)
+          const sysResources = data.sysResources
+          // Bus.$emit('powerChange')
+          // Bus.$emit('changeLefterNum')
+
+          // 查询是否有新的支付订单
+          this.checkNewOrder()
+          // 判断是否有首页权限, 没有的话去欢迎页
+          const dashboardSwitch = sysResources.find(v => v.componentName === 'dashboard')
+          if (dashboardSwitch) {
+            this.homePermission = true
+          }
+          // 如果有公司id, 进入系统
+          if (data.companyId) {
+            this.enterSystem()
+          }
+        }
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    // 查询是否有新的支付订单
+    async checkNewOrder () {
+      try {
+        const { code, data } = await getNewPaidOrderAfterLogin()
+        if (code === 0) {
+          if (data.paidNum > 0) {
+            // setTimeout(() => {
+            //   Bus.$emit('showNewOrder')
+            // }, 1000)
+          }
+        }
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    // 进入系统
+    async enterSystem () {
+      try {
+        const { code, data } = await getCompany({ id: this.$store.state.user.userInfo.companyId })
+        if (code === 0) {
+          // 存储公司信息
+          this.$store.commit('SET_COMPANY', data)
+          console.log('公司信息', data)
+        }
+      } catch (err) {
+        console.error(err)
       }
     }
   }

@@ -3,6 +3,7 @@ import i18n from '@/lang/index'
 
 const emailList = JSON.parse(localStorage.emailList)
 const phoneList = JSON.parse(localStorage.phoneList)
+const userInfo = JSON.parse(localStorage.userInfo)
 
 // 设置 localStorage 的登录信息
 function setEmailOrPhone () {
@@ -17,13 +18,13 @@ export default {
     if (data.loginChannel === 0 && emailList[data.email] && data.password === emailList[data.email].password) {
       return {
         code: 0,
-        data: data,
+        data: emailList[data.email],
         message: i18n.t('login.loginSuccess')
       }
     } else if (data.loginChannel === 1 && phoneList[data.phone] && data.password === phoneList[data.phone].password) {
       return {
         code: 0,
-        data: data,
+        data: phoneList[data.phone],
         message: i18n.t('login.loginSuccess')
       }
     } else {
@@ -94,8 +95,13 @@ export default {
       }
     }
   },
+  // 获取用户的信息
   getUserInfo: config => {
-    const { token } = paramsObj(config.url)
-    console.log('token>>', token)
+    const data = paramsObj(config.url)
+    const info = userInfo.filter(v => v.username === data.name)[0]
+    return {
+      code: 0,
+      data: info
+    }
   }
 }

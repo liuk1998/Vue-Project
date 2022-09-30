@@ -43,7 +43,6 @@ import iconEnglish from '@/assets/icon/pic_english.png' // 英文icon -> 切换�
 import iconChinese from '@/assets/icon/pic_chinese.png' // 中文icon -> 切换语言
 import LoginInput from './loginInput.vue' // 引入登录input组件
 import RegisterInput from './registerInput' // 引入注册input组件
-import { emailList, phoneList } from '@/mock/constant' // 引入 mock 静态资源
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -64,12 +63,6 @@ export default {
     }
   },
   mounted () {
-    // 存储到 localStorage
-    if (!localStorage.emailList && !localStorage.phoneList) {
-      localStorage.emailList = JSON.stringify(emailList)
-      localStorage.phoneList = JSON.stringify(phoneList)
-    }
-
     this.setLanguage()
   },
   methods: {

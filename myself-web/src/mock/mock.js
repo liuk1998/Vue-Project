@@ -1,5 +1,7 @@
 import Mock from 'mockjs'
 import loginApi from './loginApi.js'
+import orderApi from './orderApi'
+import companyApi from './companyApi'
 
 // 设置全局延时 没有延时的话有时候会检测不到数据变化 建议保留
 Mock.setup({
@@ -11,3 +13,5 @@ Mock.mock(/\/user\/login/, 'post', loginApi.loginByUsername) // 登录;当调用
 Mock.mock(/\/user\/register/, 'post', loginApi.registerByUsername)
 Mock.mock(/\/user\/password-check/, 'post', loginApi.forgetPassword)
 Mock.mock(/\/user\/info\.*/, 'get', loginApi.getUserInfo)
+Mock.mock(/\/order\/get-new-orders/, 'get', orderApi.getNewOrders)
+Mock.mock(/\/comp\/comp-company/, 'get', companyApi.getCompany)

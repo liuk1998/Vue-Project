@@ -21,6 +21,8 @@
 
 <!--  编写 javascript  -->
 <script>
+import { emailList, phoneList, userInfo, companyInfo } from '@/mock/constant' // 引入 mock 静态资源
+
 export default {
   name: 'App',
   // todo 存放属性。
@@ -43,6 +45,15 @@ export default {
       this.network = true
       console.log('网络已连接')
     })
+
+    // 存储到 localStorage
+    // localStorage.clear()
+    if (!localStorage.emailList && !localStorage.phoneList) {
+      localStorage.emailList = JSON.stringify(emailList)
+      localStorage.phoneList = JSON.stringify(phoneList)
+      localStorage.userInfo = JSON.stringify(userInfo)
+      localStorage.companyInfo = JSON.stringify(companyInfo)
+    }
   }
 }
 </script>

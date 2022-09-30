@@ -50,11 +50,13 @@ service.interceptors.response.use(
       // eslint-disable-next-line prefer-promise-reject-errors
       return Promise.reject('error')
     } else {
-      Message({
-        message: res.message,
-        type: 'success',
-        duration: 5 * 1000
-      })
+      if (res.message) {
+        Message({
+          message: res.message,
+          type: 'success',
+          duration: 5 * 1000
+        })
+      }
       return response.data
     }
   },

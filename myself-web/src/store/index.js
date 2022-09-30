@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import user from './modules/user'
 
+// Vuex是实现组件全局状态（数据）管理的一种机制，可以方便的实现组件之间的数据共享。
 Vue.use(Vuex)
 
 export default new Vuex.Store({
