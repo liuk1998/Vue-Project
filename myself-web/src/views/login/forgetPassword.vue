@@ -185,7 +185,6 @@ export default {
     // 生成验证码数字
     makeCode () {
       this.code = randomNum(1000, 9999).toString()
-      console.log('验证码: ', this.code)
     },
     // 刷新验证码数字
     refreshCode () {

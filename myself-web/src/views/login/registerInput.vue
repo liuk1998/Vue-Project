@@ -56,7 +56,6 @@ import iconChinese from '@/assets/icon/pic_chinese.png' // 中文icon -> 切换�
 import VerifcationCode from '@/components/register/verificationCode.vue'
 import { randomNum } from '@/utils/index' // 公共方法
 import { register, getInfo } from '@/api/login'
-const Base64 = require('js-base64').Base64 // 引入密码加密
 
 export default {
   name: 'RegisterInput',
@@ -168,7 +167,6 @@ export default {
     // 生成验证码数字
     makeCode () {
       this.code = randomNum(1000, 9999).toString()
-      console.log('验证码: ', this.code)
     },
     // 刷新验证码数字
     refreshCode () {
@@ -204,9 +202,6 @@ export default {
       try {
         const { code, data } = await register({ ...this.ruleForm, phone })
         if (code === 0) {
-          // 记住密码
-          localStorage.username = phone
-          localStorage.password = Base64.encode(this.ruleForm.password)
           // 获取用户信息
           this.getUserInfo(data.userId)
         }

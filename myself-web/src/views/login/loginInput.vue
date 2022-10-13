@@ -56,7 +56,6 @@ import Bus from '@/utils/bus'
 import { getInfo } from '@/api/login'
 import { getNewPaidOrderAfterLogin } from '@/api/order'
 import { getCompany } from '@/api/company'
-const Base64 = require('js-base64').Base64 // 引入密码加密
 
 export default {
   name: 'LoginInput',
@@ -132,16 +131,6 @@ export default {
     }
     // 取消表单校验
     this.initFromRules()
-    // 记住密码
-    if (localStorage.username) {
-      if (this.loginChannel === 1) {
-        this.language = localStorage.username.substr(1, 2)
-        this.ruleForm.phone = localStorage.username.substr(3, 11)
-      } else if (this.loginChannel === 0) {
-        this.ruleForm.email = localStorage.username
-      }
-      this.ruleForm.password = Base64.decode(localStorage.password)
-    }
 
     console.log('Bus', Bus)
   },
@@ -207,9 +196,6 @@ export default {
           const { code, data } = res
           if (code === 0) {
             console.log('邮箱登录成功>>', data)
-            // 记住密码
-            localStorage.username = this.ruleForm.email
-            localStorage.password = Base64.encode(this.ruleForm.password)
             // 获取用户信息
             this.getUserInfo(data.userId)
           }
@@ -223,8 +209,8 @@ export default {
           if (code === 0) {
             console.log('手机登录成功>>', data)
             // 记住密码
-            localStorage.username = phone
-            localStorage.password = Base64.encode(this.ruleForm.password)
+            // localStorage.username = phone
+            // localStorage.password = Base64.encode(this.ruleForm.password)
             // 获取用户信息
             this.getUserInfo(data.userId)
           }
