@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <!-- 国际化 -->
-    <div class="login_language">
+    <div class="login-language">
       <!-- elementUI Select选择器(下拉列表) -->
       <!-- v-model:绑定值;  popper-class:Select下拉框的类名;  change:选中值发生变化时触发;  prefix:插槽,Select组件头部内容  -->
       <el-select v-model="language" popper-class="language" @change="changeLanguage">
@@ -16,17 +16,17 @@
       </el-select>
     </div>
     <!-- 登录 -->
-    <div class="login_box">
-      <div class="login_logo">
-        <span class="login_tips">{{ $t('login.welcome') }}</span>
+    <div class="login-box">
+      <div class="login-logo">
+        <span class="login-tips">{{ $t('login.welcome') }}</span>
         <img src="@/assets/icon/发布会.svg" class="login_bg" alt="">
       </div>
       <div class="login_info login_info_from">
-        <div class="login_tab">
+        <div class="login-tab">
           <!-- transform:变换;  translateX:X轴平移;  -->
-          <div :style="{transform:`translateX(${isLogin ? 0 : 100}%)`}" class="choose_tab_active_bar"></div>
-          <div :class="['choose_tab', {'is_active': isLogin}]" @click="isLogin=true">{{ $t('login.login') }}</div>
-          <div :class="['choose_tab', {'is_active': !isLogin}]" @click="isLogin=false">{{ $t('login.signUp') }}</div>
+          <div :style="{transform:`translateX(${isLogin ? 0 : 100}%)`}" class="choose-tab-active-bar"></div>
+          <div :class="['choose-tab', {'is_active': isLogin}]" @click="isLogin=true">{{ $t('login.login') }}</div>
+          <div :class="['choose-tab', {'is_active': !isLogin}]" @click="isLogin=false">{{ $t('login.signUp') }}</div>
         </div>
         <!-- 登录input组件 -->
         <login-input v-if="isLogin"></login-input>
@@ -98,7 +98,7 @@ export default {
   min-height: 700px;
 
   // 国际化
-  .login_language {
+  .login-language {
     position: absolute;
     top: 32px;
     right: 32px;
@@ -127,16 +127,16 @@ export default {
   }
 
   // 登录
-  .login_box {
+  .login-box {
     display: flex;
     min-height: 550px;
     margin-top: 10%;
 
-    .login_logo {
+    .login-logo {
       width: 495px;
       position: relative;
 
-      .login_tips {
+      .login-tips {
         font-size: 26px;
         font-weight: 500;
         color: #262326;
@@ -153,14 +153,14 @@ export default {
     .login_info {
       width: 460px;
 
-      .login_tab {
+      .login-tab {
         display: flex;
         position: relative;
         cursor: pointer;
         padding-bottom: 16px;
 
-        // 伪类 CSS3写法 &代表它的上一级的 class 名字 ---> 这里指的是 login_tab
-        &::after { // 在类名为login_tab的元素的内容之后插入新内容
+        // 伪类 CSS3写法 &代表它的上一级的 class 名字 ---> 这里指的是 login-tab
+        &::after { // 在类名为login-tab的元素的内容之后插入新内容
           content: ""; // 用于在元素的 ::before 和 ::after 伪元素中插入内容。使用 content 属性插入的内容都是匿名的可替换元素。
           position: absolute;
           left: 0;
@@ -172,7 +172,7 @@ export default {
           border-radius: 25px;
         }
 
-        .choose_tab_active_bar {
+        .choose-tab-active-bar {
           width: 50%;
           height: 4px;
           position: absolute;
@@ -184,7 +184,7 @@ export default {
           transition: transform .3s cubic-bezier(.645, .045, .355, 1);
         }
 
-        .choose_tab {
+        .choose-tab {
           width: 50%;
           font-size: 28px;
           font-weight: 700;

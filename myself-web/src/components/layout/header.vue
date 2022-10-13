@@ -1,25 +1,15 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="wrap-page">
-    欢迎页
-    <header-view />
-  </div>
+  <div>头部</div>
 </template>
 
 <script>
-import HeaderView from '@/components/layout/header'
-
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: 'Welcome',
-  components: {
-    HeaderView
-  }
+  name: 'Header'
 }
 </script>
 
 <style lang="scss" scoped>
-.wrap-page {
 
-}
 </style>

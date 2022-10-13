@@ -9,13 +9,15 @@
       <router-link to="/about">About</router-link> -->
     <!-- </nav> -->
 
-    <!-- 带有 v-show 的元素始终会被渲染并保留在 DOM 中。v-show 只是简单地切换元素的 CSS display。v-show 不支持 <template> 元素，也不支持 v-else -->
-    <div v-show="!network" class="no-internet">
-      <img :src="networkImg" alt="">
-      <p>抱歉,没有internet连接</p>
+    <div class="wrap-area">
+      <!-- 带有 v-show 的元素始终会被渲染并保留在 DOM 中。v-show 只是简单地切换元素的 CSS display。v-show 不支持 <template> 元素，也不支持 v-else -->
+      <div v-show="!network" class="no-internet">
+        <img :src="networkImg" alt="">
+        <p>抱歉,没有internet连接</p>
+      </div>
+      <!-- router-view 组件作为vue最核心的路由管理组件(承载router.js配置的组件)。在最核心的App.vue文件中通过router-view进行路由管理。使用this.$router.push进行页面上router-view组件的路由替换 -->
+      <router-view v-show="network" />
     </div>
-    <!-- router-view 组件作为vue最核心的路由管理组件(承载router.js配置的组件)。在最核心的App.vue文件中通过router-view进行路由管理。使用this.$router.push进行页面上router-view组件的路由替换 -->
-    <router-view v-show="network" />
   </div>
 </template>
 
@@ -69,26 +71,31 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
   width: 100%;
   height: 100%;
 
-  // 断网
-  .no-internet {
-    width: 100vw;
-    height: 100vh;
+  .wrap-area {
+    width: 100%;
+    height: 100%;
+    overflow: auto hidden;
     display: flex;
-    justify-content: center;
-    align-items: center;
 
-    img {
-      width: 350px;
-    }
+    // 断网
+    .no-internet {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-    p {
-      margin-top: 20px;
-      text-align: center;
+      img {
+        width: 350px;
+      }
+
+      p {
+        margin-top: 20px;
+        text-align: center;
+      }
     }
   }
 }

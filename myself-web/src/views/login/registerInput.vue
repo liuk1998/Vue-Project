@@ -1,7 +1,7 @@
 <template>
-  <div class="fxq_login login_from">
+  <div class="fxq-login login-from">
     <el-form ref="ruleForm" :model="ruleForm" :rules="rules" label-width="100px">
-      <div class="login_email">
+      <div class="login-email">
         <el-form-item prop="phone" class="phone">
           <el-input v-model.trim="ruleForm.phone" :placeholder="$t('login.phone')" maxlength="13" @input="formatPhone" @focus="initFromRules" @keyup.enter.native="submitForm('ruleForm')">
             <el-select slot="prepend" v-model="language" popper-class="language" @focus="initFromRules">
@@ -233,11 +233,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login_from {
+.login-from {
   padding-top: 40px;
   position: relative;
 
-  .login_email {
+  .login-email {
     .el-form-item {
       margin-bottom: 10px;
     }

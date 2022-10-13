@@ -1,10 +1,10 @@
 <template>
   <div class="page">
-    <div class="area fxq_login">
-      <div class="area_img1">
+    <div class="area fxq-login">
+      <div class="area-img1">
         <img src="../../assets/icon/pic_pc.png" alt="">
       </div>
-      <div class="area_img2">
+      <div class="area-img2">
         <img src="../../assets/icon/forget2.png" alt="">
       </div>
       <div class="form">
@@ -12,12 +12,12 @@
           <span>{{ $t('login.forgetPasswordTitle') }}</span>
         </div>
         <div class="tab">
-          <div :style="{ 'transform': `translateX(${ channel === 0 ? 0 : 100 }%)` }" class="choose_tab_active_bar" />
-          <div :class="['choose_tab', { 'is_active': channel === 0 }]" @click="changeChannel(0)">{{ $t('login.phone') }}</div>
-          <div :class="['choose_tab', { 'is_active': channel === 1 }]" @click="changeChannel(1)">{{ $t('login.email') }}</div>
+          <div :style="{ 'transform': `translateX(${ channel === 0 ? 0 : 100 }%)` }" class="choose-tab-active-bar" />
+          <div :class="['choose-tab', { 'is_active': channel === 0 }]" @click="changeChannel(0)">{{ $t('login.phone') }}</div>
+          <div :class="['choose-tab', { 'is_active': channel === 1 }]" @click="changeChannel(1)">{{ $t('login.email') }}</div>
         </div>
         <el-form ref="ruleForm" :model="ruleForm" :rules="rules">
-          <div class="forget_box">
+          <div class="forget-box">
             <el-form-item v-if="channel === 0" prop="phone" class="phone">
               <el-input v-model="ruleForm.phone" :placeholder="$t('login.phone')" maxlength="13" @input="formatPhone" @focus="initFromRules">
                 <el-select slot="prepend" v-model="language" popper-class="language" @focus="initFromRules">
@@ -54,7 +54,7 @@
               </el-input>
             </el-form-item>
             <el-button type="warning" @click="submitForm('ruleForm')">{{ $t('login.confirm') }}</el-button>
-            <div class="go_back" @click="toLogin">{{ $t('login.goBack') }}</div>
+            <div class="go-back" @click="toLogin">{{ $t('login.goBack') }}</div>
           </div>
         </el-form>
       </div>
@@ -272,13 +272,13 @@ export default {
       align-items: center;
     }
 
-    .area_img1 {
+    .area-img1 {
       float: left;
       margin-left: -65px;
       margin-top: 190px;
     }
 
-    .area_img2 {
+    .area-img2 {
       float: right;
       margin-right: -38px;
       margin-top: -186px;
@@ -308,7 +308,7 @@ export default {
         margin: 0px 41px;
         display: flex;
 
-        .choose_tab_active_bar {
+        .choose-tab-active-bar {
           width: 50%;
           position: absolute;
           bottom: 0;
@@ -331,7 +331,7 @@ export default {
           border-radius: 25px;
         }
 
-        .choose_tab {
+        .choose-tab {
           width: 50%;
           font-size: 18px;
           font-weight: 700;
@@ -347,7 +347,7 @@ export default {
         }
       }
 
-      .forget_box {
+      .forget-box {
         margin: 20px 41px 0;
 
         .phone {
@@ -410,7 +410,7 @@ export default {
           padding: 6px 20px;
         }
 
-        .go_back {
+        .go-back {
           color: #FA8E03;
           margin: 20px 0px;
           cursor: pointer;

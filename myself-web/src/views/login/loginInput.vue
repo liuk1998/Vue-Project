@@ -1,6 +1,6 @@
 <template>
-  <div class="fxq_login login_from">
-    <div class="select_login_try">
+  <div class="fxq-login login-from">
+    <div class="select-login-try">
       <div :class="loginChannel === 1 ? 'login-select' : 'login-unselect'" @click="toggleLogin(1)">{{ $t('login.phone') }}</div>
       <div :class="loginChannel === 1 ? 'login-unselect' : 'login-select'" @click="toggleLogin(0)">{{ $t('login.email') }}</div>
     </div>
@@ -37,7 +37,7 @@
         </el-input>
       </el-form-item>
       <el-form-item>
-        <div class="forget_password" @click="goForget">{{ $t('login.forgetPassword') }}</div>
+        <div class="forget-password" @click="goForget">{{ $t('login.forgetPassword') }}</div>
       </el-form-item>
       <el-form-item>
         <!-- elementUI Button按钮 -->
@@ -208,9 +208,6 @@ export default {
           const { code, data } = res
           if (code === 0) {
             console.log('手机登录成功>>', data)
-            // 记住密码
-            // localStorage.username = phone
-            // localStorage.password = Base64.encode(this.ruleForm.password)
             // 获取用户信息
             this.getUserInfo(data.userId)
           }
@@ -295,7 +292,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login_from {
+.login-from {
   padding-top: 70px;
   position: relative;
 
@@ -303,7 +300,7 @@ export default {
     margin-bottom: 14px;
   }
 
-  .select_login_try {
+  .select-login-try {
     width: 182px;
     height: 32px;
     background-color:#A2AFE8;
@@ -404,7 +401,7 @@ export default {
   }
 }
 
-.forget_password {
+.forget-password {
   float: right;
   color:#FA8E03;
   cursor: pointer;
