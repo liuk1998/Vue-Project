@@ -1,15 +1,19 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div>头部</div>
+  <div class="xxx">左侧栏</div>
 </template>
 
 <script>
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: 'Header'
+  name: 'Left'
 }
 </script>
 
 <style lang="scss" scoped>
-
+.xxx {
+  width: 50px;
+  height: 100px;
+  background-color: orange;
+}
 </style>

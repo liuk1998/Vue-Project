@@ -10,6 +10,10 @@
     <!-- </nav> -->
 
     <div class="wrap-area">
+      <div v-show="menubar">
+        <!-- 左侧导航组件 -->
+        <left-view />
+      </div>
       <!-- 带有 v-show 的元素始终会被渲染并保留在 DOM 中。v-show 只是简单地切换元素的 CSS display。v-show 不支持 <template> 元素，也不支持 v-else -->
       <div v-show="!network" class="no-internet">
         <img :src="networkImg" alt="">
@@ -24,14 +28,29 @@
 <!--  编写 javascript  -->
 <script>
 import { emailList, phoneList, userInfo, companyInfo } from '@/mock/constant' // 引入 mock 静态资源
+import LeftView from '@/components/layout/left.vue' // 引入左侧导航组件
 
 export default {
   name: 'App',
+  components: {
+    LeftView
+  },
   // todo 存放属性。
   data () {
     return {
       network: true, // 是否断网
-      networkImg: '' // 断网图片
+      networkImg: '', // 断网图片
+      menubar: false // 左侧导航组件开关
+    }
+  },
+  // 监听器: 当监听的属性变量变化时，会触发 watch 中的方法
+  watch: {
+    // 监听路由的路径名; $route对象表示当前的路由信息，包含了当前 URL 解析得到的信息。包含当前的路径，参数，query对象等。
+    '$route.path' (newVal, oldVal) {
+      const { options: { routes } } = this.$router // $router对象是全局路由的实例;
+      // 判断是否显示左侧导航
+      const findRoute = routes.find(el => el.path === newVal)
+      this.menubar = findRoute && findRoute.menubar
     }
   },
   // todo 生命周期: 挂载后,也就是模板中的HTML渲染到HTML页面中,此时一般可以做一些ajax操作,mounted只会执行一次。
@@ -79,6 +98,12 @@ export default {
     height: 100%;
     overflow: auto hidden;
     display: flex;
+    background-color: #fcf9f8;
+
+    .wrap-page {
+      width: 100%;
+      background-color: #f5f5f5;
+    }
 
     // 断网
     .no-internet {
@@ -109,7 +134,6 @@ nav {
     // 当链接被精确匹配的时候应该激活的 class。
     &.router-link-exact-active {
       color: #42b983;
-      background-image: url("");
     }
   }
 }

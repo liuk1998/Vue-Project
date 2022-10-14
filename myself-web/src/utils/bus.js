@@ -1,3 +1,2 @@
 import Vue from 'vue'
-const v = new Vue()
-export default v
+export default new Vue() // 空的vue实例作为事件总线

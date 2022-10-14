@@ -18,12 +18,14 @@ const routes = [
   {
     path: '/home',
     name: PATH_NAME.PATH_NAME_DASHBOARD.name,
-    component: () => import('@/views/home/index.vue')
+    component: () => import('@/views/home/index.vue'),
+    menubar: true // 固定路由参数(用于判断某些条件)
   },
   {
     path: '/welcome',
     name: PATH_NAME.PATH_NAME_WELCOME.name,
-    component: () => import('@/views/home/welcome.vue')
+    component: () => import('@/views/home/welcome.vue'),
+    menubar: true
   },
   {
     path: '/test',

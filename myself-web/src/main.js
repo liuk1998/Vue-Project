@@ -6,6 +6,7 @@ import router from './router'
 import store from './store'
 import i18n from './lang' // 国际化
 import '@/style/login.scss'
+import '@/style/index.scss'
 import ga from './directive/ga/index'
 require('./mock/mock') // mock假数据
 

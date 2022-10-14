@@ -32,5 +32,8 @@ export default {
     emailNotRegistered: 'Email Not Registered',
     phoneNotRegistered: 'Phone Not Registered',
     passwordChangedSuccessfully: 'Password changed successfully'
+  },
+  header: {
+    back: 'Back'
   }
 }

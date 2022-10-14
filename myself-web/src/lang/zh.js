@@ -32,5 +32,8 @@ export default {
     emailNotRegistered: '邮箱未注册',
     phoneNotRegistered: '手机号未注册',
     passwordChangedSuccessfully: '密码修改成功'
+  },
+  header: {
+    back: '返回'
   }
 }
