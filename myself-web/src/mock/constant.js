@@ -72,5 +72,7 @@ export const companyInfo = [{
   guideStatus: 0, // 0 未激活， 1 需要引导  ，2已完成
   wmsStatusFlag: 0, // 入口权限的接口  1开启  0关闭
   logo: '', // 公司logo
-  guideCompleteIndex: '0' // 引导进入第几步
+  guideCompleteIndex: '0', // 引导进入第几步
+  saasVersionName: 'Free', // 系统版本(付费或试用)
+  versionDeadline: '2023-08-02 00:00:00' // 试用到期时间
 }]

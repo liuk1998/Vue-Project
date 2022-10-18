@@ -34,6 +34,7 @@ export default {
     passwordChangedSuccessfully: '密码修改成功'
   },
   header: {
-    back: '返回'
+    back: '返回',
+    days: '天'
   }
 }

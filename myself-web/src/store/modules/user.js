@@ -7,7 +7,7 @@ const user = {
     token: getToken(),
     username: '',
     userInfo: {}, // 登录的用户信息
-    companyInfo: {} // 公司信息
+    companyInfo: null // 公司信息
   },
   mutations: {
     // 同步改变state中的状态; 使用方式: 标签中: @click="$store.commit('SET_TOKEN')"; 函数中: this.$store.commit('SET_TOKEN')

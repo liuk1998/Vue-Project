@@ -34,6 +34,7 @@ export default {
     passwordChangedSuccessfully: 'Password changed successfully'
   },
   header: {
-    back: 'Back'
+    back: 'Back',
+    days: 'Days'
   }
 }
