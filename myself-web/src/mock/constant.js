@@ -48,10 +48,11 @@ export const userInfo = [{
   promotionGuide: '1',
   sysResources: [{ // 用户配置
     appType: '00',
-    componentName: 'dashboard',
+    componentName: '', // dashboard
     nameChinese: '看板',
     nameEnglish: 'DashBoard'
-  }]
+  }],
+  three: true
 }, {
   username: 'liuYanQ',
   userId: '2',

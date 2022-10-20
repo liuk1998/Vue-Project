@@ -35,6 +35,7 @@ export default {
   },
   header: {
     back: '返回',
-    days: '天'
+    days: '天',
+    three: '3D库'
   }
 }

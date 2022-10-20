@@ -35,6 +35,7 @@ export default {
   },
   header: {
     back: 'Back',
-    days: 'Days'
+    days: 'Days',
+    three: '3D Library'
   }
 }

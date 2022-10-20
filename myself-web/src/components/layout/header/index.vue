@@ -24,10 +24,17 @@
       <!-- 跳转3d库 -->
       <div class="header-btn">
         <img src="@/assets/icon/wmsTitle.png" alt="" class="header-btn-img">
-        <p class="header-btn-text" @click="goThree">hightopo</p>
+        <p class="header-btn-text" @click="goThree">{{ $store.state.user.userInfo.three ? $t('header.three') : 'hightopo' }}</p>
       </div>
+      <!-- 进入官网 -->
       <div class="header-btn">
+        <!-- Dropdown 下拉菜单 -->
+        <el-dropdown>
+          <p>Website</p>
+          <el-dropdown-menu slot="dropdown">
 
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
       <div class="header-btn">
 
@@ -69,7 +76,7 @@ export default {
           this.guideSwitch = false
           this.guideName = 'Upgrade'
         } else {
-          // 换算倒计时天数
+          // 换算倒计时天数 换算时期格式
           const day = this.$moment(this.$moment('2023-08-02 00:00:00').format('YYYY-MM-DD')).diff(this.$moment(new Date()).format('YYYY-MM-DD')) / 1000 / 60 / 60 / 24
           this.guideName = `${saasVersionName}(${day > 0 ? day : 0} ${this.$t('header.days')})`
           if (day > 30) {
@@ -80,7 +87,7 @@ export default {
         }
       } else {
         this.guideSwitch = false
-        const day = this.$moment(this.$moment('2022-10-22 00:00:00').format('YYYY-MM-DD')).diff(this.$moment(new Date()).format('YYYY-MM-DD')) / 1000 / 60 / 60 / 24
+        const day = this.$moment(this.$moment('2022-11-10 00:00:00').format('YYYY-MM-DD')).diff(this.$moment(new Date()).format('YYYY-MM-DD')) / 1000 / 60 / 60 / 24
         this.guideName = `Free(${day > 0 ? day : 0} ${this.$t('header.days')})`
         if (day > 30) {
           this.guideSwitch = true
@@ -96,7 +103,11 @@ export default {
     },
     // 跳转3d库
     goThree () {
-      window.open('https://www.hightopo.com/demos/index.html')
+      if (this.$store.state.user.userInfo.three) {
+        console.log('跳转3D主页')
+      } else {
+        window.open('https://www.hightopo.com/demos/index.html')
+      }
     }
   }
 }
