@@ -36,6 +36,10 @@ export default {
   header: {
     back: 'Back',
     days: 'Days',
-    three: '3D Library'
+    three: '3D Library',
+    appDownload: 'Scan QR code to enter',
+    helpTips: 'Help',
+    helpCenter: 'Help Center',
+    weChat: 'WeChat'
   }
 }

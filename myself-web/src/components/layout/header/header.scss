@@ -63,7 +63,7 @@
       background: #ffffff;
       border-radius: 20px;
       line-height: 32px;
-      box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.03);
+      box-shadow: 0px 2px 10px 0px rgba(115, 91, 91, 0.03);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -79,6 +79,35 @@
         color: #606266;
       }
     }
+  }
+}
+
+.el-dropdown-menu {
+  border-radius: 6px;
+}
+
+.header-box {
+  display: flex;
+  align-items: center;
+
+  .header-img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .header-text {
+    padding-left:5px;
+  }
+}
+
+.header-website:hover {
+  background-color: #fff;
+  cursor: default;
+
+  p {
+    color: #606266;
+    cursor: default;
+
   }
 }
 

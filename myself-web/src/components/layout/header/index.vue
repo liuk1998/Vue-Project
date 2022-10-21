@@ -32,14 +32,44 @@
         <el-dropdown>
           <p>Website</p>
           <el-dropdown-menu slot="dropdown">
-
+            <el-dropdown-item class="header-website">
+              <p style="text-align:center;">{{ $t('header.appDownload') }}</p>
+              <img src="@/assets/icon/erweima.jpeg" alt="" style="width:220px;height:220px;">
+            </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
+      <!-- 帮助中心 -->
       <div class="header-btn">
-
+        <el-dropdown>
+          <p>{{ $t('header.helpTips') }}</p>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>
+              <div class="header-box">
+                <img src="@/assets/icon/helpcenter.png" alt="" class="header-img">
+                <span class="header-text">{{ $t('header.helpCenter') }}</span>
+              </div>
+            </el-dropdown-item>
+            <el-dropdown-item>
+              <div class="header-box">
+                <img src="@/assets/icon/instagram-fill@2x.png" alt="" class="header-img">
+                <span class="header-text">Instagram</span>
+              </div>
+            </el-dropdown-item>
+            <el-dropdown-item>
+              <div class="header-box" @click="showWeChatDialog">
+                <img src="@/assets/icon/wechat.png" alt="" class="header-img">
+                <span class="header-text">{{ $t('header.weChat') }}</span>
+              </div>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
     </div>
+    <!-- 微信二维码  Dialog 对话框 visible: 是否显示(支持组件双向绑定,即 sync) -->
+    <el-dialog :visible.sync="showWeChat" width="30%">
+      <img src="@/assets/icon/WechatIMG4.jpeg" alt="" width="100%" height="100%">
+    </el-dialog>
   </div>
 </template>
 
@@ -54,7 +84,8 @@ export default {
       isDeg: true, // 显示或隐藏左侧组件(旋转头部图标开关)
       leftOrBack: true, // 显示控制左侧导航图标或者返回图标
       guideSwitch: true, // 判断是否免费版或付费版
-      guideName: '' // 版本名称
+      guideName: '', // 版本名称
+      showWeChat: false // 是否显示微信二维码
     }
   },
   computed: {
@@ -108,6 +139,10 @@ export default {
       } else {
         window.open('https://www.hightopo.com/demos/index.html')
       }
+    },
+    // 展示微信二维码
+    showWeChatDialog () {
+      this.showWeChat = !this.showWeChat
     }
   }
 }

@@ -36,6 +36,10 @@ export default {
   header: {
     back: '返回',
     days: '天',
-    three: '3D库'
+    three: '3D库',
+    appDownload: '扫描二维码进入',
+    helpTips: '帮助',
+    helpCenter: '帮助中心',
+    weChat: '微信'
   }
 }
