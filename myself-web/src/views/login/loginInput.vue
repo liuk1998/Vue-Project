@@ -20,6 +20,7 @@
           <!-- prepend:代表放在紧贴在依赖组件的前面 -->
           <el-select slot="prepend" v-model="language" popper-class="language" @focus="initFromRules">
             <template #prefix>
+              <!-- 返回值必须带函数括号 -->
               <img :src="findLanguageImg()" alt="">
             </template>
             <el-option v-for="(itm,idx) in languages" :key="idx" :label="itm.label" :value="itm.value">

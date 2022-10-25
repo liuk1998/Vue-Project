@@ -65,6 +65,17 @@
           </el-dropdown-menu>
         </el-dropdown>
       </div>
+      <div class="header-btn">
+        <div class="header-logo">
+          <img :src="companyLogo()" alt="">
+        </div>
+        <el-dropdown>
+          <span>{{ username }}</span>
+          <el-dropdown-menu>
+
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
     </div>
     <!-- 微信二维码  Dialog 对话框 visible: 是否显示(支持组件双向绑定,即 sync) -->
     <el-dialog :visible.sync="showWeChat" width="30%">
@@ -75,6 +86,7 @@
 
 <script>
 // import Bus from '@/utils/bus.js' // 引入事件容器 (事件派发)
+import headerLogo from '@/assets/icon/hand_avatar.png'
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -85,13 +97,15 @@ export default {
       leftOrBack: true, // 显示控制左侧导航图标或者返回图标
       guideSwitch: true, // 判断是否免费版或付费版
       guideName: '', // 版本名称
-      showWeChat: false // 是否显示微信二维码
+      showWeChat: false, // 是否显示微信二维码
+      username: '' // 用户名
     }
   },
   computed: {
   },
   mounted () {
     this.guideShow() // 版本按钮
+    this.username = this.$store.state.user.userInfo.username
   },
   methods: {
     // 打开左侧组件
@@ -143,6 +157,11 @@ export default {
     // 展示微信二维码
     showWeChatDialog () {
       this.showWeChat = !this.showWeChat
+    },
+    // 展示系统头像
+    companyLogo () {
+      const logo = this.$store.state.user.companyInfo ? this.$store.state.user.companyInfo.logo : null
+      return logo || headerLogo
     }
   }
 }
