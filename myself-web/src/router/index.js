@@ -28,6 +28,11 @@ const routes = [
     menubar: true
   },
   {
+    path: '/threePage',
+    name: 'threePage',
+    component: () => import('@/views/three/index.vue')
+  },
+  {
     path: '/test',
     name: 'test',
     component: () => import('@/views/teacher/test05.vue')

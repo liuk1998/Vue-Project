@@ -51,6 +51,7 @@ export default {
       // 判断是否显示左侧导航
       const findRoute = routes.find(el => el.path === newVal)
       this.menubar = findRoute && findRoute.menubar
+      console.log('route', this.menubar, findRoute)
     }
   },
   // todo 生命周期: 挂载后,也就是模板中的HTML渲染到HTML页面中,此时一般可以做一些ajax操作,mounted只会执行一次。

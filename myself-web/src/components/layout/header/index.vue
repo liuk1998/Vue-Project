@@ -149,7 +149,7 @@ export default {
     // 跳转3d库
     goThree () {
       if (this.$store.state.user.userInfo.three) {
-        console.log('跳转3D主页')
+        this.$router.push({ name: 'threePage' })
       } else {
         window.open('https://www.hightopo.com/demos/index.html')
       }
