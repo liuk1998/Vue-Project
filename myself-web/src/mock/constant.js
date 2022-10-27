@@ -63,7 +63,8 @@ export const userInfo = [{
   returnPageFlag: '1',
   noticeId: '44',
   promotionGuide: '1',
-  sysResources: [{}]
+  sysResources: [{}],
+  three: false
 }]
 
 // 公司信息

@@ -217,6 +217,7 @@ export default {
         if (code === 0) {
           // 存储用户信息
           this.$store.commit('SET_USERINFO', data)
+          sessionStorage.userInfo = JSON.stringify(data)
           console.log('用户信息', data)
           // 配置权限
           // Bus.$emit('powerChange')

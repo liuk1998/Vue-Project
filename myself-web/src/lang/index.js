@@ -13,7 +13,7 @@ Vue.use(VueI18n)
 
 const i18n = new VueI18n({
 
-  locale: sessionStorage.getItem('lang') || DEFAULT_LANGUAGE, // 语言标识 -> 获取本地选择的语言
+  locale: sessionStorage.lang || DEFAULT_LANGUAGE, // 语言标识 -> 获取本地选择的语言
 
   silentTranslationWarn: true,
   messages: {

@@ -224,6 +224,7 @@ export default {
         if (code === 0) {
           // 存储用户信息
           this.$store.commit('SET_USERINFO', data)
+          sessionStorage.userInfo = JSON.stringify(data)
           console.log('用户信息', data)
           // localStorage.username = data.username
           // localStorage.userId = data.userId
@@ -260,6 +261,7 @@ export default {
         if (code === 0) {
           // 存储公司信息
           this.$store.commit('SET_COMPANY', data)
+          sessionStorage.companyInfo = JSON.stringify(data)
           console.log('公司信息', data)
           if (this.homePermission) {
             // 查询是否有新的支付订单

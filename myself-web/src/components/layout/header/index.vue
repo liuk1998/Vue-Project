@@ -105,7 +105,7 @@ export default {
   },
   mounted () {
     this.guideShow() // 版本按钮
-    this.username = this.$store.state.user.userInfo.username
+    this.username = JSON.parse(sessionStorage.userInfo).username
   },
   methods: {
     // 打开左侧组件
@@ -115,8 +115,8 @@ export default {
     },
     // 版本按钮
     guideShow () {
-      if (this.$store.state.user.companyInfo) {
-        const saasVersionName = this.$store.state.user.companyInfo.saasVersionName
+      if (sessionStorage.companyInfo !== 'undefined') {
+        const saasVersionName = JSON.parse(sessionStorage.companyInfo).saasVersionName
         if (saasVersionName === 'Upgrade') {
           this.guideSwitch = false
           this.guideName = 'Upgrade'
@@ -148,7 +148,7 @@ export default {
     },
     // 跳转3d库
     goThree () {
-      if (this.$store.state.user.userInfo.three) {
+      if (JSON.parse(sessionStorage.userInfo).three) {
         this.$router.push({ name: 'threePage' })
       } else {
         window.open('https://www.hightopo.com/demos/index.html')
@@ -160,7 +160,7 @@ export default {
     },
     // 展示系统头像
     companyLogo () {
-      const logo = this.$store.state.user.companyInfo ? this.$store.state.user.companyInfo.logo : null
+      const logo = sessionStorage.companyInfo !== 'undefined' ? JSON.parse(sessionStorage.companyInfo).logo : null
       return logo || headerLogo
     }
   }
