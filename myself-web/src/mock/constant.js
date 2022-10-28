@@ -75,6 +75,6 @@ export const companyInfo = [{
   wmsStatusFlag: 0, // 入口权限的接口  1开启  0关闭
   logo: 'https://img2.baidu.com/it/u=538238390,1225392963&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=707', // 公司logo
   guideCompleteIndex: '0', // 引导进入第几步
-  saasVersionName: 'Free', // 系统版本(付费或试用)
+  saasVersionName: 'Basic', // 系统版本(付费或试用)
   versionDeadline: '2023-08-02 00:00:00' // 试用到期时间
 }]

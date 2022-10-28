@@ -144,6 +144,17 @@
   }
 }
 
+.version-box {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+}
+
 @keyframes move {
   0% {
     left: -20px;
