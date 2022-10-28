@@ -47,11 +47,21 @@ export default {
         {
           title: '工厂',
           three: [
+            { img: require('@/assets/three/power.png'), name: '变电所综合管理平台', url: 'https://stellular-pony-6440b2.netlify.app' },
+            { img: require('@/assets/three/donga.png'), name: '哈尔滨东安-工厂', url: 'https://benevolent-medovik-fee92f.netlify.app' },
+            { img: require('@/assets/three/iron.png'), name: 'HT-室内钢厂', url: 'https://deft-dragon-e8a806.netlify.app' },
             { img: require('@/assets/three/audi.png'), name: '麦克奥迪-配电厂', url: 'https://fastidious-squirrel-7fd70e.netlify.app' },
             { img: require('@/assets/three/granary.png'), name: '麦克奥迪-粮仓', url: 'https://venerable-sopapillas-4974a3.netlify.app' },
-            { img: require('@/assets/three/iron.png'), name: 'HT-室内钢厂', url: 'https://deft-dragon-e8a806.netlify.app' },
             { img: require('@/assets/three/factory.png'), name: 'HT-电缆厂', url: 'https://bejewelled-cheesecake-34ab13.netlify.app' },
-            { img: require('@/assets/three/ship.png'), name: '中远-船厂', url: 'https://frolicking-pudding-8614de.netlify.app' }
+            { img: require('@/assets/three/ship.png'), name: '中远-船厂', url: 'https://frolicking-pudding-8614de.netlify.app' },
+            { img: require('@/assets/three/nun.png'), name: '智慧供暖平台', url: 'https://stalwart-arithmetic-59ca08.netlify.app' },
+            { img: require('@/assets/three/area.png'), name: '麦克奥迪-变电港口', url: 'https://benevolent-salmiakki-35b73e.netlify.app' }
+          ]
+        },
+        {
+          title: '机械',
+          three: [
+            { img: require('@/assets/three/ohai.png'), name: '傲海-机械平台', url: 'https://beamish-ganache-064f15.netlify.app' }
           ]
         }
       ]
@@ -77,7 +87,7 @@ export default {
   overflow: auto;
 
   .content-box {
-    width: 60%;
+    width: 70%;
     padding-top: 30px;
 
     .title {
