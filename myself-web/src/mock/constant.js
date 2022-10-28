@@ -37,7 +37,7 @@ export const phoneList = {
 
 // 用户信息
 export const userInfo = [{
-  username: 'liuK', // 用户名
+  username: 'liuKe', // 用户名
   userId: '1', // 用户id
   email: '157604279@qq.com',
   companyId: '1', // 公司id
@@ -73,7 +73,7 @@ export const companyInfo = [{
   name: 'Stokis-LiuK', // 公司名称
   guideStatus: 0, // 0 未激活， 1 需要引导  ，2已完成
   wmsStatusFlag: 0, // 入口权限的接口  1开启  0关闭
-  logo: 'https://img1.baidu.com/it/u=2075714591,3473300154&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=400', // 公司logo
+  logo: 'https://img2.baidu.com/it/u=538238390,1225392963&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=707', // 公司logo
   guideCompleteIndex: '0', // 引导进入第几步
   saasVersionName: 'Free', // 系统版本(付费或试用)
   versionDeadline: '2023-08-02 00:00:00' // 试用到期时间

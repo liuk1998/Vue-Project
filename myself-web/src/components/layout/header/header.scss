@@ -91,6 +91,22 @@
           height: 100%;
         }
       }
+
+      .header-name {
+        width: 110px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        img {
+          width: 20px;
+          margin-bottom: 2px;
+        }
+      }
+    }
+
+    .header-new {
+      padding: 0 5px !important;
     }
   }
 }

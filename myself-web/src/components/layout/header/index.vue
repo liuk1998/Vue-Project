@@ -24,7 +24,7 @@
       <!-- 跳转3d库 -->
       <div class="header-btn">
         <img src="@/assets/icon/wmsTitle.png" alt="" class="header-btn-img">
-        <p class="header-btn-text" @click="goThree">{{ $store.state.user.userInfo.three ? $t('header.three') : 'hightopo' }}</p>
+        <p class="header-btn-text" @click="goThree">{{ userInfo.three ? $t('header.three') : 'hightopo' }}</p>
       </div>
       <!-- 进入官网 -->
       <div class="header-btn">
@@ -65,12 +65,15 @@
           </el-dropdown-menu>
         </el-dropdown>
       </div>
-      <div class="header-btn">
+      <div class="header-btn header-new">
         <div class="header-logo">
           <img :src="companyLogo()" alt="">
         </div>
         <el-dropdown>
-          <span>{{ username }}</span>
+          <div class="header-name">
+            <span>{{ userInfo.username }}</span>
+            <img src="@/assets/icon/下拉.svg" alt="" class="header-img">
+          </div>
           <el-dropdown-menu>
 
           </el-dropdown-menu>
@@ -98,14 +101,16 @@ export default {
       guideSwitch: true, // 判断是否免费版或付费版
       guideName: '', // 版本名称
       showWeChat: false, // 是否显示微信二维码
-      username: '' // 用户名
+      userInfo: '', // 存储在sessionStorage的用户信息数据
+      companyInfo: '' // 存储在sessionStorage的公司信息数据
     }
   },
   computed: {
   },
   mounted () {
     this.guideShow() // 版本按钮
-    this.username = JSON.parse(sessionStorage.userInfo).username
+    this.userInfo = JSON.parse(sessionStorage.userInfo)
+    this.companyInfo = sessionStorage.companyInfo !== 'undefined' ? JSON.parse(sessionStorage.companyInfo) : undefined
   },
   methods: {
     // 打开左侧组件
@@ -115,8 +120,8 @@ export default {
     },
     // 版本按钮
     guideShow () {
-      if (sessionStorage.companyInfo !== 'undefined') {
-        const saasVersionName = JSON.parse(sessionStorage.companyInfo).saasVersionName
+      if (this.companyInfo) {
+        const saasVersionName = this.companyInfo.saasVersionName
         if (saasVersionName === 'Upgrade') {
           this.guideSwitch = false
           this.guideName = 'Upgrade'
@@ -148,7 +153,7 @@ export default {
     },
     // 跳转3d库
     goThree () {
-      if (JSON.parse(sessionStorage.userInfo).three) {
+      if (this.userInfo.three) {
         this.$router.push({ name: 'threePage' })
       } else {
         window.open('https://www.hightopo.com/demos/index.html')
@@ -160,7 +165,7 @@ export default {
     },
     // 展示系统头像
     companyLogo () {
-      const logo = sessionStorage.companyInfo !== 'undefined' ? JSON.parse(sessionStorage.companyInfo).logo : null
+      const logo = this.companyInfo ? this.companyInfo.logo : null
       return logo || headerLogo
     }
   }
