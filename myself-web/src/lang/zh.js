@@ -40,6 +40,9 @@ export default {
     appDownload: '扫描二维码进入',
     helpTips: '帮助',
     helpCenter: '帮助中心',
-    weChat: '微信'
+    weChat: '微信',
+    basicSetting: '基本设置',
+    orderSetting: '订单设置',
+    resetPassword: '重置密码'
   }
 }

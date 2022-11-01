@@ -40,6 +40,9 @@ export default {
     appDownload: 'Scan QR code to enter',
     helpTips: 'Help',
     helpCenter: 'Help Center',
-    weChat: 'WeChat'
+    weChat: 'WeChat',
+    basicSetting: 'Basic Settings',
+    orderSetting: 'Order Settings',
+    resetPassword: 'Reset Password'
   }
 }

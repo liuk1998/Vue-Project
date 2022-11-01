@@ -76,9 +76,28 @@
             <img src="@/assets/icon/下拉.svg" alt="" class="header-img">
           </div>
           <el-dropdown-menu>
-            <el-dropdown-item style="background: #465FD2; color: white;">
+            <!-- 版本按钮 -->
+            <el-dropdown-item v-if="guideSwitch" style="background: #465FD2; color: white;">
               <div class="version-box" @click="goVersionChoose">
                 <img src="@/assets/icon/goVersion.svg" alt=""><span>{{ guideName }}</span>
+              </div>
+            </el-dropdown-item>
+            <!-- 基本设置 -->
+            <el-dropdown-item>
+              <div class="version-box" @click="goBasicSetting">
+                <img src="@/assets/icon/interface-essential-268@2x.png" alt=""><span>{{ $t('header.basicSetting') }}</span>
+              </div>
+            </el-dropdown-item>
+            <!-- 订单设置 -->
+            <el-dropdown-item>
+              <div class="version-box" @click="goOrderSetting">
+                <img src="@/assets/icon/settings-filter-menu@2x.png" alt=""><span>{{ $t('header.orderSetting') }}</span>
+              </div>
+            </el-dropdown-item>
+            <!-- 重置密码 -->
+            <el-dropdown-item>
+              <div class="version-box" @click="goOrderSetting">
+                <img src="@/assets/icon/keyhole-refresh-reload@2x.png" alt=""><span>{{ $t('header.resetPassword') }}</span>
               </div>
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -132,7 +151,7 @@ export default {
           this.guideName = 'Upgrade'
         } else {
           // 换算倒计时天数 换算时期格式
-          const day = this.$moment(this.$moment('2023-08-02 00:00:00').format('YYYY-MM-DD')).diff(this.$moment(new Date()).format('YYYY-MM-DD')) / 1000 / 60 / 60 / 24
+          const day = this.$moment(this.$moment(this.companyInfo.versionDeadline).format('YYYY-MM-DD')).diff(this.$moment(new Date()).format('YYYY-MM-DD')) / 1000 / 60 / 60 / 24
           this.guideName = `${saasVersionName} (${day > 0 ? day : 0} ${this.$t('header.days')})`
           if (day > 30) {
             this.guideSwitch = true
@@ -172,6 +191,14 @@ export default {
     companyLogo () {
       const logo = this.companyInfo ? this.companyInfo.logo : null
       return logo || headerLogo
+    },
+    // 跳转基本设置页面
+    goBasicSetting () {
+      console.log('跳转基本设置页面')
+    },
+    // 跳转订单设置页面
+    goOrderSetting () {
+      console.log('跳转订单设置页面')
     }
   }
 }
