@@ -43,6 +43,9 @@ export default {
     weChat: '微信',
     basicSetting: '基本设置',
     orderSetting: '订单设置',
-    resetPassword: '重置密码'
+    resetPassword: '重置密码',
+    logout: '登出',
+    website: '官网',
+    tips: '进入系统商品'
   }
 }

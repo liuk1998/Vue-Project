@@ -10,12 +10,17 @@
     <!-- 返回图标 -->
     <div v-show="!leftOrBack">{{ $t('header.back') }}</div>
     <!-- 路由名称 -->
-    <!-- <div class="route-name"></div> -->
-    <div class="global-alert" style="min-width: 425px;height: 42px;background:#FFF6EA; position: absolute;left: 45px;right: 700px;"></div>
-    <div class="global-alert"></div>
+    <div v-if="crumbsName" class="route-name">
+      <span>{{ crumbsName }}</span>
+    </div>
+    <!-- 首页提示 -->
+    <div v-show="productSwitch" class="global-alert">
+      <img src="@/assets/icon/re_auth.png" alt="">
+      <span class="global-text">{{ $t('header.tips') }}</span>
+      <img src="@/assets/icon/re_auth_close.png" alt="" class="global-close" @click="productSwitch = !productSwitch">
+    </div>
     <!-- flex布局占位 -->
     <div id="tags-view-container" class="tags-view-container"/>
-    <!-- <div class="tracking_no"></div> -->
     <!-- 版本按钮 icon: 图标类名 -->
     <div v-show="!guideSwitch" class="all guideBtn">
       <el-button type="warning" icon="el-icon-data-line" @click="goVersionChoose">{{ guideName }}</el-button>
@@ -30,7 +35,7 @@
       <div class="header-btn">
         <!-- Dropdown 下拉菜单 -->
         <el-dropdown>
-          <p>Website</p>
+          <p>{{ $t('header.website') }}</p>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item class="header-website">
               <p style="text-align:center;">{{ $t('header.appDownload') }}</p>
@@ -96,8 +101,22 @@
             </el-dropdown-item>
             <!-- 重置密码 -->
             <el-dropdown-item>
-              <div class="version-box" @click="goOrderSetting">
+              <div class="version-box" @click="goResetPassword">
                 <img src="@/assets/icon/keyhole-refresh-reload@2x.png" alt=""><span>{{ $t('header.resetPassword') }}</span>
+              </div>
+            </el-dropdown-item>
+            <!-- 退出登录 -->
+            <el-dropdown-item>
+              <div class="version-box" @click="goLogin">
+                <img src="@/assets/icon/exit-door-log-out@2x.png" alt=""><span>{{ $t('header.logout') }}</span>
+              </div>
+            </el-dropdown-item>
+            <!-- 切换语言 -->
+            <div style="width: 86%; height: 1px; background-color: #dfe4ed; margin: 0 auto;"></div>
+            <el-dropdown-item>
+              <div class="say-box">
+                <img src="@/assets/icon/pic_english.png" alt="" :class="['lang', $i18n.locale === 'en' ? 'isActive' : '']" @click="changeLocale('en')">
+                <img src="@/assets/icon/pic_chinese.png" alt="" :class="['lang', $i18n.locale === 'zh' ? 'isActive' : '']" @click="changeLocale('zh')">
               </div>
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -108,6 +127,18 @@
     <el-dialog :visible.sync="showWeChat" width="30%">
       <img src="@/assets/icon/WechatIMG4.jpeg" alt="" width="100%" height="100%">
     </el-dialog>
+    <!-- 下载进度动画 -->
+    <div :class="['progress-bar', { 'active': tag }]">
+      <div class="ball">
+        <p v-if="guesserStatus === 3" class="speeding">{{ percentage }}%</p>
+        <p v-else-if="guesserStatus === 1" class="speeding"><i class="el-icon-check"/></p>
+        <p v-else-if="guesserStatus === 2" class="speeding"><i class="el-icon-close"/></p>
+      </div>
+      <div class="text-bar">
+        <span>{{ msg }}</span>
+        <span>ok</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -118,6 +149,13 @@ import headerLogo from '@/assets/icon/hand_avatar.png'
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Header',
+  // 父组件传值
+  props: {
+    crumbsName: {
+      type: Object,
+      default: null
+    }
+  },
   data () {
     return {
       isDeg: true, // 显示或隐藏左侧组件(旋转头部图标开关)
@@ -126,7 +164,12 @@ export default {
       guideName: '', // 版本名称
       showWeChat: false, // 是否显示微信二维码
       userInfo: '', // 存储在sessionStorage的用户信息数据
-      companyInfo: '' // 存储在sessionStorage的公司信息数据
+      companyInfo: '', // 存储在sessionStorage的公司信息数据
+      tag: true, // 是否展示下载进度
+      guesserStatus: 3, // 下载进度状态(1成功 2失败 3进行中)
+      percentage: 0, // 下载动态数字
+      msg: '',
+      productSwitch: true // 是否处于productMaster页面
     }
   },
   computed: {
@@ -199,6 +242,21 @@ export default {
     // 跳转订单设置页面
     goOrderSetting () {
       console.log('跳转订单设置页面')
+    },
+    // 跳转重置密码页面
+    goResetPassword () {
+      console.log('跳转重置密码页面')
+    },
+    // 退出登录
+    goLogin () {
+      sessionStorage.clear()
+      this.$router.push({ name: 'login' })
+    },
+    // 修改语言
+    changeLocale (locale) {
+      sessionStorage.lang = locale
+      this.$router.go(0)
+      this.$i18n.locale = locale
     }
   }
 }

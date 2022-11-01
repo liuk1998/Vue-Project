@@ -43,6 +43,9 @@ export default {
     weChat: 'WeChat',
     basicSetting: 'Basic Settings',
     orderSetting: 'Order Settings',
-    resetPassword: 'Reset Password'
+    resetPassword: 'Reset Password',
+    logout: 'Log out',
+    website: 'Website',
+    tips: 'Enter system commodity'
   }
 }
