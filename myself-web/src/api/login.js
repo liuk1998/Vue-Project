@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 登录
 export function login (data) {
   return request({
-    url: '/user/login',
+    url: '/api/user/login',
     method: 'post',
     data
   })
@@ -12,7 +12,7 @@ export function login (data) {
 // 注册
 export function register (data) {
   return request({
-    url: '/user/register',
+    url: '/api/user/register',
     method: 'post',
     data
   })
@@ -21,7 +21,7 @@ export function register (data) {
 // 忘记密码
 export function forgetPassword (data) {
   return request({
-    url: '/user/password-check',
+    url: '/api/user/password-check',
     method: 'post',
     data
   })
@@ -30,7 +30,7 @@ export function forgetPassword (data) {
 // 获取用户信息
 export function getInfo (params) {
   return request({
-    url: '/user/info',
+    url: '/api/user/info',
     method: 'get',
     params
   })
