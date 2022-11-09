@@ -32,6 +32,7 @@ export function getInfo (params) {
   return request({
     url: '/api/user/info',
     method: 'get',
-    params
+    params,
+    noLoading: true // 不需要loading
   })
 }

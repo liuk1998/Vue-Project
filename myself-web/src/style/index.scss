@@ -18,3 +18,26 @@
   background-color: #FA8E03;
   border-color: #FA8E03;
 }
+
+// loading样式
+.el-loading-mask {
+  .el-loading-spinner {
+    background: url(../assets/bg/loading.gif) no-repeat;
+    display: inline-block;
+    background-size: 370px 130px;
+    height: 150px;
+    width: 100%;
+    background-position: center;
+    top: 40%;
+
+    .el-icon-loading,
+    .circular {
+      /*隐藏 之前  element-ui  默认的 loading 动画*/
+      display: none;
+    }
+  }
+}
+
+.el-loading-mask {
+  background-color: rgba(250, 245, 242, 0.8) !important;
+}
