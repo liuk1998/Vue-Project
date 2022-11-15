@@ -69,7 +69,7 @@ export default {
     })
 
     // 存储到 localStorage
-    localStorage.clear()
+    // localStorage.clear()
     if (!localStorage.emailList && !localStorage.phoneList) {
       localStorage.emailList = JSON.stringify(emailList)
       localStorage.phoneList = JSON.stringify(phoneList)

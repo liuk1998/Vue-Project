@@ -31,7 +31,8 @@ export default {
     goBack: 'Go Back',
     emailNotRegistered: 'Email Not Registered',
     phoneNotRegistered: 'Phone Not Registered',
-    passwordChangedSuccessfully: 'Password changed successfully'
+    passwordChangedSuccessfully: 'Password changed successfully',
+    resetPassword: 'Reset Password'
   },
   header: {
     back: 'Back',

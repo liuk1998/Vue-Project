@@ -27,6 +27,15 @@ export function forgetPassword (data) {
   })
 }
 
+// 重置密码
+export function resetPassword (data) {
+  return request({
+    url: '/api/user/password-reset',
+    method: 'post',
+    data
+  })
+}
+
 // 获取用户信息
 export function getInfo (params) {
   return request({

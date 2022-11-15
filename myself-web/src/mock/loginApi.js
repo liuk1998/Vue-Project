@@ -112,6 +112,28 @@ export default {
       }
     }
   },
+  // 重置密码
+  resetPassword: config => {
+    console.log('2312312', config)
+    const data = JSON.parse(config.body)
+    if (Object.keys(emailList).includes(data.email)) {
+      emailList[data.email].password = data.password
+      phoneList[emailList[data.email].phone].password = data.password
+      // 设置 localStorage 的登录信息
+      setEmailOrPhone()
+      return {
+        code: 0,
+        data: null,
+        message: i18n.t('login.passwordChangedSuccessfully')
+      }
+    } else {
+      return {
+        code: 1,
+        data: null,
+        message: i18n.t('login.phoneNotRegistered')
+      }
+    }
+  },
   // 获取用户的信息
   getUserInfo: config => {
     const data = paramsObj(config.url)

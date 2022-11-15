@@ -12,6 +12,7 @@ Mock.setup({
 Mock.mock(/\/api\/user\/login/, 'post', loginApi.loginByUsername) // 登录;当调用登录接口user/loign时候会自动对应到loginByUsername这个函数执行这个函数,这个函数会返回是否登录成功数据。返回成功的数据,就是登录成功了,否则相反。
 Mock.mock(/\/api\/user\/register/, 'post', loginApi.registerByUsername)
 Mock.mock(/\/api\/user\/password-check/, 'post', loginApi.forgetPassword)
+Mock.mock(/\/api\/user\/password-reset/, 'post', loginApi.resetPassword)
 Mock.mock(/\/api\/user\/info\.*/, 'get', loginApi.getUserInfo)
 Mock.mock(/\/api\/order\/get-new-orders/, 'get', orderApi.getNewOrders)
 Mock.mock(/\/api\/comp\/comp-company/, 'get', companyApi.getCompany)

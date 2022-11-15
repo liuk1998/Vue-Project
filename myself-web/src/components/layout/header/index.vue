@@ -80,7 +80,7 @@
             <span>{{ userInfo.username }}</span>
             <img src="@/assets/icon/下拉.svg" alt="" class="header-img">
           </div>
-          <el-dropdown-menu>
+          <el-dropdown-menu slot="dropdown">
             <!-- 版本按钮 -->
             <el-dropdown-item v-if="guideSwitch" style="background: #465FD2; color: white;">
               <div class="version-box" @click="goVersionChoose">
@@ -204,7 +204,7 @@ export default {
         }
       } else {
         this.guideSwitch = false
-        const day = this.$moment(this.$moment('2022-11-10 00:00:00').format('YYYY-MM-DD')).diff(this.$moment(new Date()).format('YYYY-MM-DD')) / 1000 / 60 / 60 / 24
+        const day = this.$moment(this.$moment('2022-12-8 00:00:00').format('YYYY-MM-DD')).diff(this.$moment(new Date()).format('YYYY-MM-DD')) / 1000 / 60 / 60 / 24
         this.guideName = `Free (${day > 0 ? day : 0} ${this.$t('header.days')})`
         if (day > 30) {
           this.guideSwitch = true
@@ -245,7 +245,7 @@ export default {
     },
     // 跳转重置密码页面
     goResetPassword () {
-      console.log('跳转重置密码页面')
+      this.$router.push({ name: 'resetPassword' })
     },
     // 退出登录
     goLogin () {

@@ -31,7 +31,8 @@ export default {
     goBack: '返回',
     emailNotRegistered: '邮箱未注册',
     phoneNotRegistered: '手机号未注册',
-    passwordChangedSuccessfully: '密码修改成功'
+    passwordChangedSuccessfully: '密码修改成功',
+    resetPassword: '重置密码'
   },
   header: {
     back: '返回',
