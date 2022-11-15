@@ -28,7 +28,7 @@
 <!--  编写 javascript  -->
 <script>
 import { emailList, phoneList, userInfo, companyInfo } from '@/mock/constant' // 引入 mock 静态资源
-import LeftView from '@/components/layout/left.vue' // 引入左侧导航组件
+import LeftView from '@/components/layout/left/index.vue' // 引入左侧导航组件
 
 export default {
   name: 'App',

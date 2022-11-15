@@ -143,7 +143,7 @@
 </template>
 
 <script>
-// import Bus from '@/utils/bus.js' // 引入事件容器 (事件派发)
+import Bus from '@/utils/bus.js' // 引入事件容器 (事件派发)
 import headerLogo from '@/assets/icon/hand_avatar.png'
 
 export default {
@@ -183,7 +183,7 @@ export default {
     // 打开左侧组件
     openLeft () {
       this.isDeg = !this.isDeg
-      // Bus.$emit('myMsg', this.isCollapse) // 发送 myMsg 主题 的Bus消息
+      Bus.$emit('myMsg', this.isDeg) // 观察者模式 (调用方法)
     },
     // 版本按钮
     guideShow () {
