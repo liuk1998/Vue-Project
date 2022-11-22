@@ -59,6 +59,26 @@
     &:hover {
       background-color: #F5F7FF;
     }
+
+    .circle-open {
+      height: 16px;
+      min-width: 16px;
+      text-align: center;
+      line-height: 16px;
+      font-size: 12px;
+      background-color: #FF5722;
+      color: #fff;
+      border-radius: 8px;
+      position: absolute;
+      right: 32px;
+      top: 35%;
+      font-weight: 700;
+    }
+
+    .circle-close {
+      right: 13px;
+      top: 22%;
+    }
   }
 
   .is-active {
@@ -84,6 +104,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     background-color: #fff;
+    transition: 0s;
 
     .menu-list {
       width: 100%;

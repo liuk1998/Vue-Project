@@ -136,6 +136,12 @@
 
     .header-new {
       padding: 0 5px !important;
+
+      // css 排除第一个字元素
+      ::v-deep .el-dropdown-menu__item:not(:first-child):hover {
+        background-color: #F5F7FF !important;
+        color: #465FD2;
+      }
     }
   }
 
@@ -252,8 +258,8 @@
 }
 
 // css 排除第一个字元素
-::v-deep .el-dropdown-menu__item:not(:first-child):hover {
-  background-color: #F5F7FF !important;
+::v-deep .el-dropdown-menu__item:hover {
+  background-color: #F5F7FF;
   color: #465FD2;
 }
 

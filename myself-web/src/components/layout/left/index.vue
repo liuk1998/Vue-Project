@@ -25,6 +25,8 @@
         <el-menu-item v-if="webPower.orderlist" index="3" @click="goRouter(constant.PATH_NAME_DASHBOARD)">
           <img src="@/assets/icon/Orders.svg" alt="">
           <span v-if="isCollapse">{{ $t('left.orders') }}</span>
+          <div v-show="isCollapse" class="circle-open">{{ pendingNum }}</div>
+          <div v-show="!isCollapse" class="circle-open circle-close">{{ pendingNum }}</div>
         </el-menu-item>
       </div>
     </el-menu>
@@ -44,7 +46,8 @@ export default {
       constant: PATH_NAME, // 跳转的路径集
       activeIndex: '',
       userInfo: '', // 存储在sessionStorage的用户信息数据
-      webPower: {} // 权限集合
+      webPower: {}, // 权限集合
+      pendingNum: 0 // 新的订单
     }
   },
   computed: {
