@@ -17,11 +17,11 @@
 
     .left-logo-img1 {
       height: 50%;
-      margin-right: 5px;
+      margin-right: 10px;
     }
 
     span {
-      font-size: 22px;
+      font-size: 25px;
       font-weight: 600;
       // 文字渐变
       background: linear-gradient(45deg, #465FD2, pink);
@@ -35,6 +35,18 @@
       to {
         filter: hue-rotate(360deg); // 色调旋转滤镜
       }
+    }
+  }
+
+  .el-menu-vertical {
+    width: 100%;
+    height: calc(100% - 80px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #fff;
+
+    .menu-list {
+
     }
   }
 }

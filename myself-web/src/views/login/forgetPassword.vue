@@ -418,6 +418,7 @@ export default {
           line-height: 32px;
           font-size: 12px;
           font-weight: 500;
+          text-align: center;
 
           &:hover {
             font-size: 14px;

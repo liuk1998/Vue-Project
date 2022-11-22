@@ -19,7 +19,7 @@
     <div class="login-box">
       <div class="login-logo">
         <span class="login-tips">{{ $t('login.welcome') }}</span>
-        <img src="@/assets/icon/发布会.svg" class="login_bg" alt="">
+        <img src="@/assets/icon/work.gif" class="login_bg" alt="">
       </div>
       <div class="login_info login_info_from">
         <div class="login-tab">
@@ -142,11 +142,15 @@ export default {
         color: #262326;
         position: absolute;
         left: 71px;
-        top: 32px;
+        top: 5px;
+        z-index: 10;
       }
 
       .login_bg{
         margin-top: 30px;
+        width: 100%;
+        position: absolute;
+        top: -72px;
       }
     }
 
