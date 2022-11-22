@@ -251,6 +251,12 @@
   border-radius: 6px;
 }
 
+// css 排除第一个字元素
+::v-deep .el-dropdown-menu__item:not(:first-child):hover {
+  background-color: #F5F7FF !important;
+  color: #465FD2;
+}
+
 ::v-deep .el-dialog {
   margin-top: 8vh !important;
 }

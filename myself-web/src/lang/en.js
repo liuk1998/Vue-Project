@@ -48,5 +48,10 @@ export default {
     logout: 'Log out',
     website: 'Website',
     tips: 'Enter system commodity'
+  },
+  left: {
+    dashboard: 'Dashboard',
+    shop: 'shop',
+    orders: 'orders'
   }
 }

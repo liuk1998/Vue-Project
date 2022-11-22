@@ -226,26 +226,14 @@ export default {
           this.$store.commit('SET_USERINFO', data)
           sessionStorage.userInfo = JSON.stringify(data)
           console.log('用户信息', data)
-          // localStorage.username = data.username
-          // localStorage.userId = data.userId
-          // localStorage.companyId = data.companyId
-          // localStorage.guidanceFlag = data.guidanceFlag
-          // localStorage.orderPageFlag = data.orderPageFlag
-          // localStorage.returnPageFlag = data.returnPageFlag
-          // localStorage.noticeId = data.noticeId
-          // localStorage.promotionGuide = data.promotionGuide
-          // localStorage.email = data.email
-
-          // 配置权限
-          // localStorage.configure = JSON.stringify(data.sysResources)
-          const sysResources = data.sysResources
-          // Bus.$emit('powerChange')
+          // 获取权限列表 观察者模式 (调用方法)
+          Bus.$emit('powerChange', data.sysResources)
           // Bus.$emit('changeLefterNum')
 
           // 判断是否有首页权限, 没有的话去欢迎页
-          const dashboardSwitch = sysResources.find(v => v.componentName === 'dashboard')
+          const dashboardSwitch = data.sysResources.find(v => v.componentName === 'dashboard')
           if (dashboardSwitch) {
-            this.homePermission = true
+            this.homePermission = false
           }
           // 进入系统
           this.enterSystem()

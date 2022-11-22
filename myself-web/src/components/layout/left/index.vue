@@ -7,10 +7,25 @@
       <img src="@/assets/icon/变形金刚.svg" alt="" class="left-logo-img1">
       <span v-if="isCollapse" class="text-text">LiuK's MIS</span>
     </div>
-    <!-- NavMenu 导航菜单 default-active: 当前激活菜单的 index; collapse: 是否水平折叠收起菜单; -->
+    <!-- NavMenu 导航菜单 default-active: 当前激活菜单的 index; collapse: 是否水平折叠收起菜单; index: 唯一标志; -->
     <el-menu :default-active="activeIndex" :collapse="isCollapse" class="el-menu-vertical">
+      <!-- 系统权限菜单 -->
       <div v-show="!menuType" class="menu-list">
-
+        <!-- 看板 -->
+        <el-menu-item v-if="webPower.dashboard" index="1" @click="goRouter(constant.PATH_NAME_DASHBOARD)">
+          <img src="@/assets/icon/Dashboard.svg" alt="">
+          <span v-if="isCollapse">{{ $t('left.dashboard') }}</span>
+        </el-menu-item>
+        <!-- 店铺 -->
+        <el-menu-item v-if="webPower.shop" index="2" @click="goRouter(constant.PATH_NAME_DASHBOARD)">
+          <img src="@/assets/icon/Marketing.svg" alt="">
+          <span v-if="isCollapse">{{ $t('left.shop') }}</span>
+        </el-menu-item>
+        <!-- 订单 -->
+        <el-menu-item v-if="webPower.orderlist" index="3" @click="goRouter(constant.PATH_NAME_DASHBOARD)">
+          <img src="@/assets/icon/Orders.svg" alt="">
+          <span v-if="isCollapse">{{ $t('left.orders') }}</span>
+        </el-menu-item>
       </div>
     </el-menu>
   </div>
@@ -27,7 +42,9 @@ export default {
     return {
       isCollapse: true, // 左边栏是否显隐
       constant: PATH_NAME, // 跳转的路径集
-      activeIndex: ''
+      activeIndex: '',
+      userInfo: '', // 存储在sessionStorage的用户信息数据
+      webPower: {} // 权限集合
     }
   },
   computed: {
@@ -37,15 +54,29 @@ export default {
     }
   },
   mounted () {
+    this.userInfo = JSON.parse(sessionStorage.userInfo)
+    // 获取权限列表
+    this.getPermissionList(this.userInfo.sysResources)
     // 控制左边栏显隐 观察者模式 (注册方法)
     Bus.$on('myMsg', myMsg => {
       this.isCollapse = myMsg
+    })
+    // 获取权限列表 观察者模式 (注册方法)
+    Bus.$on('powerChange', power => {
+      this.getPermissionList(power)
     })
   },
   methods: {
     // 跳转对应的页面
     goRouter (data) {
       this.$router.push({ name: data.name })
+    },
+    // 获取权限列表
+    getPermissionList (power) {
+      power.filter(el => ['0', '1'].includes(el.type)).forEach(el => {
+        this.$set(this.webPower, el.componentName.replaceAll('-', ''), true)
+      })
+      console.log('权限列表', this.webPower)
     }
   }
 }

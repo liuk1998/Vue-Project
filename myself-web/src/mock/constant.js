@@ -47,10 +47,16 @@ export const userInfo = [{
   noticeId: '44',
   promotionGuide: '1',
   sysResources: [{ // 用户配置
-    appType: '00',
-    componentName: '', // dashboard
+    componentName: 'dashboard',
     nameChinese: '看板',
-    nameEnglish: 'DashBoard'
+    nameEnglish: 'DashBoard',
+    type: '0'
+  }, {
+    componentName: 'shop',
+    type: '0'
+  }, {
+    componentName: 'orderlist',
+    type: '0'
   }],
   three: true
 }, {
@@ -63,7 +69,7 @@ export const userInfo = [{
   returnPageFlag: '1',
   noticeId: '44',
   promotionGuide: '1',
-  sysResources: [{}],
+  sysResources: [],
   three: false
 }]
 
@@ -73,7 +79,7 @@ export const companyInfo = [{
   name: 'Stokis-LiuK', // 公司名称
   guideStatus: 0, // 0 未激活， 1 需要引导  ，2已完成
   wmsStatusFlag: 0, // 入口权限的接口  1开启  0关闭
-  logo: 'https://img2.baidu.com/it/u=538238390,1225392963&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=707', // 公司logo
+  logo: null, // 公司logo
   guideCompleteIndex: '0', // 引导进入第几步
   saasVersionName: 'Basic', // 系统版本(付费或试用)
   versionDeadline: '2023-08-02 00:00:00' // 试用到期时间

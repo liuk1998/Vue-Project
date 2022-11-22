@@ -56,6 +56,7 @@ import iconChinese from '@/assets/icon/pic_chinese.png' // 中文icon -> 切换�
 import VerifcationCode from '@/components/register/verificationCode.vue'
 import { randomNum } from '@/utils/index' // 公共方法
 import { register, getInfo } from '@/api/login'
+import Bus from '@/utils/bus'
 
 export default {
   name: 'RegisterInput',
@@ -219,8 +220,8 @@ export default {
           this.$store.commit('SET_USERINFO', data)
           sessionStorage.userInfo = JSON.stringify(data)
           console.log('用户信息', data)
-          // 配置权限
-          // Bus.$emit('powerChange')
+          // 获取权限列表 观察者模式 (调用方法)
+          Bus.$emit('powerChange', data.sysResources)
 
           // 进入系统
           this.$router.push({ path: '/welcome' })

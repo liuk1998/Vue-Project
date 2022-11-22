@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icon/Nav/Orders</title>
+    <g id="Icon/Nav/Orders" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-16" transform="translate(4.000000, 4.000000)">
+            <rect id="bk" fill-opacity="0" fill="#262326" x="0" y="0" width="16" height="16"></rect>
+            <rect id="矩形" stroke="#A4B4FF" x="0" y="0.8" width="16" height="15.2" rx="2"></rect>
+            <line x1="4.8" y1="3.2" x2="4.8" y2="0" id="直线-14" stroke="#A4B4FF" stroke-linecap="round" stroke-linejoin="round"></line>
+            <line x1="4" y1="6.4" x2="12" y2="6.4" id="直线-15" stroke="#A4B4FF" stroke-linecap="round" stroke-linejoin="round"></line>
+            <line x1="4.8" y1="10.4" x2="11.2" y2="10.4" id="直线-15" stroke="#A4B4FF" stroke-linecap="round" stroke-linejoin="round"></line>
+            <line x1="11.2" y1="3.2" x2="11.2" y2="0" id="直线-14" stroke="#A4B4FF" stroke-linecap="round" stroke-linejoin="round"></line>
+        </g>
+    </g>
+</svg>

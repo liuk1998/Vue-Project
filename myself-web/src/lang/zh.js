@@ -48,5 +48,10 @@ export default {
     logout: '登出',
     website: '官网',
     tips: '进入系统商品'
+  },
+  left: {
+    dashboard: '看板',
+    shop: '店铺',
+    orders: '订单'
   }
 }
