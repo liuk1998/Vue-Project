@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icon/Nav/promotion</title>
+    <g id="Icon/Nav/promotion" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="money-banknote">
+            <polygon id="路径" points="0 0 24 0 24 24 0 24"></polygon>
+            <g id="编组" transform="translate(3.000000, 5.000000)" stroke="#A4B4FF" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15,3 L16,3 C17.105,3 18,3.895 18,5 L18,12 C18,13.105 17.105,14 16,14 L5,14 C3.895,14 3,13.105 3,12 L3,10.417" id="路径"></path>
+                <path d="M2.083,10.417 L12.916,10.417 C14.067,10.417 14.9990008,9.484 14.9990008,8.334 L14.9990008,2.084 C15,0.933 14.067,0 12.917,0 L2.083,0 C0.933,0 0,0.933 0,2.083 L0,8.333 C0,9.484 0.933,10.417 2.083,10.417 Z" id="路径"></path>
+                <path d="M8.657,4.103 C9.267,4.713 9.267,5.703 8.657,6.313 C8.047,6.923 7.057,6.923 6.447,6.313 C5.837,5.703 5.837,4.713 6.447,4.103 C7.057,3.493 8.047,3.493 8.657,4.103" id="路径"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -52,6 +52,10 @@ export default {
   left: {
     dashboard: '看板',
     shop: '店铺',
-    orders: '订单'
+    orders: '订单',
+    channelProduct: '渠道商品',
+    productMaster: '系统商品',
+    promotion: '促销',
+    chatDownload: '聊天室'
   }
 }

@@ -52,6 +52,10 @@ export default {
   left: {
     dashboard: 'Dashboard',
     shop: 'shop',
-    orders: 'orders'
+    orders: 'orders',
+    channelProduct: 'Channel Product',
+    productMaster: 'Master Product',
+    promotion: 'Promotion',
+    chatDownload: 'Chat'
   }
 }

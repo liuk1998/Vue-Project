@@ -57,6 +57,15 @@ export const userInfo = [{
   }, {
     componentName: 'orderlist',
     type: '0'
+  }, {
+    componentName: 'product',
+    type: '0'
+  }, {
+    componentName: 'masterproduct',
+    type: '0'
+  }, {
+    componentName: 'promotion',
+    type: '0'
   }],
   three: true
 }, {

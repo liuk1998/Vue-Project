@@ -158,7 +158,7 @@ export default {
   },
   data () {
     return {
-      isDeg: true, // 显示或隐藏左侧组件(旋转头部图标开关)
+      isDeg: true, // 显示或隐藏左侧组件(旋转头部图标开关) -> true代表显示, false代表隐藏
       leftOrBack: true, // 显示控制左侧导航图标或者返回图标
       guideSwitch: true, // 判断是否免费版或付费版
       guideName: '', // 版本名称

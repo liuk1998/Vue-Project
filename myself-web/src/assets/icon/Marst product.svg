@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icon/Nav/Marst product</title>
+    <g id="Icon/Nav/Marst-product" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="delivery-11">
+            <g id="编组" stroke-linecap="round" stroke-linejoin="round" transform="translate(4.000000, 3.000000)" stroke="#A4B4FF" stroke-width="0.8">
+                <path d="M16,12.59991 L16,5.40009002 C16,4.7564452 15.6585257,4.16231152 15.1037419,3.84093921 L8.89625812,0.241029232 C8.34147434,-0.0803430772 7.65852566,-0.0803430772 7.10374188,0.241029232 L0.896258122,3.84093921 C0.341474345,4.16231152 0,4.7573454 0,5.40009002 L0,12.5990098 C0,13.2426546 0.341474345,13.8367883 0.896258122,14.1581606 L7.10374188,17.7589708 C7.65852566,18.0803431 8.34147434,18.0803431 8.89625812,17.7589708 L15.1037419,14.1590608 C15.6585257,13.8376885 16,13.2426546 16,12.59991 Z" id="路径"></path>
+                <line x1="3" y1="10" x2="6" y2="12" id="路径"></line>
+            </g>
+            <polyline id="路径" stroke="#A4B4FF" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" points="4 8 12 12 20 8"></polyline>
+            <g id="编组" stroke-linecap="round" stroke-linejoin="round" transform="translate(8.000000, 5.000000)" stroke="#A4B4FF" stroke-width="0.8">
+                <line x1="4.5" y1="16" x2="4.5" y2="7" id="路径"></line>
+                <line x1="0" y1="5" x2="8" y2="0" id="路径"></line>
+            </g>
+            <polygon id="路径" points="0 0 24 0 24 24 0 24"></polygon>
+        </g>
+    </g>
+</svg>
