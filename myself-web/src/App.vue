@@ -10,7 +10,7 @@
     <!-- </nav> -->
 
     <div class="wrap-area">
-      <div v-show="menubar">
+      <div v-if="menubar">
         <!-- 左侧导航组件 -->
         <left-view />
       </div>
