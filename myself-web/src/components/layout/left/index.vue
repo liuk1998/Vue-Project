@@ -79,6 +79,19 @@
           <img src="@/assets/icon/chat.svg" alt="">
           <span slot="title">{{ $t('left.chat') }}</span>
         </el-menu-item>
+        <!-- 报表 -->
+        <el-submenu v-if="webPower.report" index="8">
+          <template slot="title">
+            <img src="@/assets/icon/Report.svg" alt="">
+            <span v-show="isCollapse" slot="title" class="product-title">{{ $t('left.report') }}</span>
+            <img v-show="isCollapse" src="@/assets/icon/more.png" alt="" class="more-icon">
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="8-1" @click="goRouter(constant.PATH_NAME_DASHBOARD)">{{ $t('left.marketingReport') }}</el-menu-item>
+            <el-menu-item index="8-2" @click="goRouter(constant.PATH_NAME_DASHBOARD)">{{ $t('left.productReport') }}</el-menu-item>
+            <el-menu-item index="8-3" @click="goRouter(constant.PATH_NAME_DASHBOARD)">{{ $t('left.orderReport') }}</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
       </div>
     </el-menu>
   </div>

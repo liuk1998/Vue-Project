@@ -56,6 +56,10 @@ export default {
     channelProduct: '渠道商品',
     productMaster: '系统商品',
     promotion: '促销',
-    chatDownload: '聊天室'
+    chat: '聊天室',
+    report: '报表',
+    marketingReport: '营销报表',
+    orderReport: '订单报表',
+    productReport: '商品报表'
   }
 }

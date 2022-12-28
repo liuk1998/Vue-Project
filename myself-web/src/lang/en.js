@@ -56,6 +56,10 @@ export default {
     channelProduct: 'Channel Product',
     productMaster: 'Master Product',
     promotion: 'Promotion',
-    chatDownload: 'Chat'
+    chat: 'Chat',
+    report: 'Report',
+    marketingReport: 'Marketing Report',
+    orderReport: 'Order Report',
+    productReport: 'Product Report'
   }
 }

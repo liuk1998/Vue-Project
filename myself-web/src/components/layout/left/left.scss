@@ -188,6 +188,10 @@
   }
 }
 
+::v-deep .el-menu-item-group__title {
+  padding: 0;
+}
+
 .left-active {
   width: 65px;
   height: 100%;

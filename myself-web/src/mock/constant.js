@@ -66,6 +66,12 @@ export const userInfo = [{
   }, {
     componentName: 'promotion',
     type: '0'
+  }, {
+    componentName: 'chat',
+    type: '0'
+  }, {
+    componentName: 'report',
+    type: '0'
   }],
   three: true
 }, {

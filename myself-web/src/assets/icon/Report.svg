@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icon/Nav/Report</title>
+    <g id="Icon/Nav/Report" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-6" transform="translate(4.000000, 4.000000)">
+            <rect id="bk" fill-opacity="0" fill="#262326" x="0" y="0" width="16" height="16"></rect>
+            <path d="M5.6,16 L2.8,16 C1.2536027,16 0,14.7463973 0,13.2 L0,2.8 C0,1.2536027 1.2536027,0 2.8,0 L13.2,0 C14.7463973,0 16,1.2536027 16,2.8 L16,8.8" id="路径" stroke="#A4B4FF" stroke-linecap="round" stroke-linejoin="round"></path>
+            <polyline id="路径-4" stroke="#A4B4FF" stroke-linecap="round" stroke-linejoin="round" points="8 15.296875 10.4310547 12.8658203 12.5820312 15.0167969 15.5988281 12"></polyline>
+            <polyline id="路径-5" stroke="#A4B4FF" stroke-linecap="round" stroke-linejoin="round" points="13.6 11.44 16 11.44 16 13.84"></polyline>
+            <polyline id="路径-6" stroke="#A4B4FF" stroke-linecap="round" stroke-linejoin="round" points="3.4203125 4.53495024 4.8704155 5.98505325 7.97574627 2.87972248"></polyline>
+            <line x1="9.72617187" y1="4.53495024" x2="12.9261719" y2="4.53495024" id="路径-7" stroke="#A4B4FF" stroke-linecap="round" stroke-linejoin="round"></line>
+            <line x1="3.2" y1="8.4" x2="12.8" y2="8.4" id="路径-8" stroke="#A4B4FF" stroke-linecap="round" stroke-linejoin="round"></line>
+            <line x1="3.2" y1="12.4" x2="6.4" y2="12.4" id="路径-7" stroke="#A4B4FF" stroke-linecap="round" stroke-linejoin="round"></line>
+        </g>
+    </g>
+</svg>
